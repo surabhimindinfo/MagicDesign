@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Magic Design</string>
+    <string name="skip">Skip</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="enter_your_mobile_number">Enter Your Mobile Number</string>
+    <string name="by_creating_an_account_you_agree_to_our_terms_of_services_and_privacy_policy">By creating an account, you agree to our <b>Terms Of Services</b> and <b> Privacy Policy.</b></string>
+    <string name="create_an_account">Create an account</string>
+    <string name="sign_in">Sign in </string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login">Login</string>
+    <string name="tv_create">Don\'t have an account ? Swipe rigt to <b>Create a new account.</b></string>
+    <string name="country_isd_code">Country ISD Code</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="otp">OTP</string>
+    <string name="enter_your_otp">"Enter Your OTP "</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="submit">Submit</string>
+    <string name="my_account">My Account</string>
+    <string name="name">Name:</string>
+    <string name="email">Email:</string>
+    <string name="country">Country:</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="area">Area:</string>
+</resources>

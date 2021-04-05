@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="20dp"
+    android:background="@drawable/background"
+    android:layout_height="match_parent"
+    tools:context=".view.OtpActivity">
+
+    <TextView
+        android:layout_alignParentEnd="true"
+        android:id="@+id/tv_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/skip"
+        android:textColor="@color/white"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="312dp"
+        tools:layout_editor_absoluteY="-2dp"
+        app:drawableEndCompat="@drawable/ic_right_arrow" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/tvOTP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textSize="14sp"
+        android:layout_below="@+id/textView2"
+        android:text="@string/otp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_skip"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_bold"
+        android:text="@string/sign_up"
+        android:textStyle="bold"
+        android:textColor="@color/white" />
+
+    <EditText
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvOTP"
+        android:id="@+id/et_otp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rect_trans"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_code_icon"
+        android:ems="10"
+        android:hint="@string/enter_your_otp"
+        android:inputType="phone"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/et_otp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:id="@+id/resendTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_bold"
+        android:text="@string/resend_otp"
+        android:textStyle="bold"
+        android:textColor="@color/white" />
+
+
+    <Button
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_white"
+        android:onClick="openMainPage"
+        android:text="@string/submit"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
+</RelativeLayout>

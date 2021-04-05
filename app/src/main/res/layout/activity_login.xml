@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:background="@drawable/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+
+    <TextView
+        android:id="@+id/tv_skip"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/skip"
+        android:textColor="@color/white"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="312dp"
+        tools:layout_editor_absoluteY="-2dp"
+        app:drawableEndCompat="@drawable/ic_right_arrow" />
+
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_skip"
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/opensans_bold"
+        android:gravity="center"
+        android:text="@string/sign_in"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="24sp"  />
+
+    <TextView
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="20dp"
+        android:id="@+id/tvCountry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/country_isd_code"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvCountry"
+        android:id="@+id/countryCodeTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rect_trans"
+        android:gravity="center_vertical"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:text="+91"
+        android:textSize="14sp"
+
+        android:textColor="@color/white"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="123dp" />
+
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/countryCodeTV"
+        android:id="@+id/tvMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textSize="14sp"
+
+        android:text="@string/mobile_number"
+        android:textColor="@color/white" />
+
+
+    <EditText
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/tvMobile"
+        android:id="@+id/et_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rect_trans"
+        android:drawablePadding="10dp"
+        android:drawableStart="@drawable/ic_call"
+        android:ems="10"
+        android:hint="@string/enter_your_mobile_number"
+        android:inputType="phone"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white" />
+
+    <Button
+        android:layout_marginTop="60dp"
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:background="@drawable/btn_white"
+        android:onClick="openMainPage"
+        android:text="@string/login"
+        android:layout_below="@+id/et_phone"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_margin="20dp"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        android:id="@+id/tv_create"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_create"
+        android:textColor="@color/white"
+        android:textSize="14sp"  />
+
+
+</RelativeLayout>
