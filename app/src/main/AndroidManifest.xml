@@ -12,12 +12,14 @@
         <activity android:name=".view.EditAccountDetailActivity"/>
         <activity android:name=".view.OtpActivity" />
         <activity android:name=".view.BaseActivity" />
-        <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.LaunchActivity"
+            />
         <activity
             android:name=".view.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".view.SignUpActivity" />
-        <activity android:name=".view.LaunchActivity">
+        <activity android:name=".view.MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

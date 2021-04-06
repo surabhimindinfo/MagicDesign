@@ -176,7 +176,8 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:onClick="openMainPage"
-                android:id="@+id/submtBtn"/>
+                android:id="@+id/submtBtn"
+                tools:ignore="OnClick" />
         </LinearLayout>
     </ScrollView>
 

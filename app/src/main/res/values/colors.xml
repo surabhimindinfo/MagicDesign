@@ -5,4 +5,5 @@
     <color name="colorAccent">#bacee9</color>
     <color name="bg_trans">#8573A8EC</color>
      <color name="white">#ffffff</color>
+     <color name="black">#000000</color>
 </resources>

@@ -31,4 +31,6 @@
     <string name="state">State</string>
     <string name="city">City</string>
     <string name="area">Area:</string>
+    <string name="my_file_formats">My File Formats</string>
+    <string name="how_to_use">How To Use Application?</string>
 </resources>
