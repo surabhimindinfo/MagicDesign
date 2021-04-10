@@ -6,7 +6,7 @@
     android:padding="20dp"
     android:background="@drawable/background"
     android:layout_height="match_parent"
-    tools:context=".view.OtpActivity">
+    tools:context=".view.activity.OtpActivity">
 
     <TextView
         android:layout_alignParentEnd="true"

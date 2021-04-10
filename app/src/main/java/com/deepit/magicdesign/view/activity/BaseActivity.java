@@ -1,6 +1,4 @@
-package com.deepit.magicdesign.view;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.deepit.magicdesign.view.activity;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -8,7 +6,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 
-import com.deepit.magicdesign.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.snackbar.Snackbar;
 
 public class BaseActivity extends AppCompatActivity {

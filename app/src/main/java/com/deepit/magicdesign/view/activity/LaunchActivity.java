@@ -1,4 +1,4 @@
-package com.deepit.magicdesign.view;
+package com.deepit.magicdesign.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +22,7 @@ public class LaunchActivity extends BaseActivity {
     private void proceedToTheNextActivity() {
 
         Handler handler = new Handler();
-        long SPLASH_DELAY = 4000;
+        long SPLASH_DELAY = 2000;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

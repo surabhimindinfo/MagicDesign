@@ -1,12 +1,12 @@
-package com.deepit.magicdesign.view;
+package com.deepit.magicdesign.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.deepit.magicdesign.R;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.deepit.magicdesign.R;
 
 public class LoginActivity extends AppCompatActivity {
 

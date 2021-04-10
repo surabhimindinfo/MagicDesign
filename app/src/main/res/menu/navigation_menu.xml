@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/menu">
+        <menu>
+            <item
+                android:id="@+id/home"
+                android:icon="@drawable/ic_home"
+                android:title="@string/home" />
+            <item
+                android:id="@+id/login"
+                android:icon="@drawable/ic_log_in"
+                android:title="@string/login" />
+            <item
+                android:id="@+id/registration"
+                android:icon="@drawable/ic_registration"
+                android:title="@string/registration" />
+            <item
+                android:id="@+id/about_us"
+                android:icon="@drawable/ic_about"
+                android:title="@string/about_us" />
+            <item
+                android:id="@+id/how_to_use"
+                android:icon="@drawable/ic_question"
+                android:title="@string/how_to_use_" />
+
+            <item
+                android:id="@+id/contact_us"
+                android:icon="@drawable/ic_call"
+                android:title="@string/contact_us" />
+        </menu>
+    </item>
+</menu>

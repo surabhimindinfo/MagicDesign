@@ -9,5 +9,12 @@
          <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="navigation" parent="Widget.Design.NavigationView">
+
+        <item name="fontFamily">@font/opensans_regular</item>
+        <item name="android:textSize">20sp</item>
+
+    </style>
+
 
 </resources>
