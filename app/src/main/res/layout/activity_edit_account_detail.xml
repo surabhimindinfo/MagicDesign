@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     android:background="@drawable/background"
+    android:background="@drawable/background"
+    android:id="@+id/mainLayout"
     tools:context=".view.activity.EditAccountDetailActivity">
-    
+
     <LinearLayout
         android:padding="10dp"
-         android:gravity="center_vertical"
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="60dp">
-        
+
         <ImageView
             android:layout_weight="1"
             android:padding="8dp"
             android:src="@drawable/ic_menu"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:id="@+id/menuBtn"/>
+            android:id="@+id/menuBtn" />
+
         <ImageView
             android:layout_weight="1"
             android:padding="8dp"
             android:src="@drawable/ic_home"
             android:layout_width="0dp"
-            android:layout_height="50dp"  />
-        
+            android:layout_height="50dp" />
+
         <TextView
             android:layout_weight="5"
             android:textStyle="bold"
@@ -37,10 +38,11 @@
             android:text="@string/my_account"
             android:layout_width="0dp"
             android:layout_marginStart="20dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
 
         <TextView
+            android:onClick="openMainPage"
             android:layout_weight="3"
             android:id="@+id/tv_skip"
             android:layout_width="0dp"
@@ -69,100 +71,103 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-              >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                   android:hint="@string/name"
-                    android:minHeight="50dp"/>
+                    android:hint="@string/name"
+                    android:minHeight="50dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
+                    android:id="@+id/etMobile"
+                    android:enabled="false"
+
                     android:hint="@string/mobile_number"
-                    android:minHeight="50dp"/>
+                    android:minHeight="50dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:hint="@string/email"
-                    android:minHeight="50dp"/>
+                    android:minHeight="50dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCountry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:hint="@string/country"
-                    android:minHeight="50dp"/>
+                    android:minHeight="50dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/state"
-                    android:minHeight="50dp"/>
+                    android:minHeight="50dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/city"
-                    android:minHeight="50dp"/>
+                    android:minHeight="50dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etArea"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/area"
-                    android:minHeight="50dp"/>
+                    android:minHeight="50dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -175,9 +180,11 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
-                android:onClick="openMainPage"
+                android:onClick="upDateProfile"
                 android:id="@+id/submtBtn"
                 tools:ignore="OnClick" />
+
+
         </LinearLayout>
     </ScrollView>
 

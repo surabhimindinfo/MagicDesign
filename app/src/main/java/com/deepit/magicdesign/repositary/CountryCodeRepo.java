@@ -1,5 +1,7 @@
 package com.deepit.magicdesign.repositary;
 
+import android.widget.Toast;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -41,8 +43,7 @@ public class CountryCodeRepo {
             public void onFailure(Call<CountryCodeResponse> call, Throwable t) {
                 System.out.println("---- response fail----- ");
                 t.printStackTrace();
-
-                countryCodeResponseLiveData.postValue(null);
+                 countryCodeResponseLiveData.postValue(null);
 
             }
         });
@@ -51,7 +52,6 @@ public class CountryCodeRepo {
 
     public LiveData<CountryCodeResponse> getmainDesignResponse() {
 
-        System.out.println("---- design obj in repo --- " + countryCodeResponseLiveData);
 
         return countryCodeResponseLiveData;
     }

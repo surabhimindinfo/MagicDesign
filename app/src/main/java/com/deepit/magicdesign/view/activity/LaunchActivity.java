@@ -35,7 +35,7 @@ public class LaunchActivity extends BaseActivity {
 
 
                 } else
-                    showSnackBar(mainLayout);
+                    showSnackBar(mainLayout,"Connection Lost");
 
             }
         }, SPLASH_DELAY);

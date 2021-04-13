@@ -6,23 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.deepit.magicdesign.R;
 import com.deepit.magicdesign.model.CountryRecord;
 import com.deepit.magicdesign.model.OnItemClick;
+import com.deepit.magicdesign.view.activity.LoginActivity;
 import com.deepit.magicdesign.view.activity.SignUpActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class CountryCodeAdapter extends RecyclerView.Adapter<CountryCodeAdapter.ViewHolder> {
 
     private List<CountryRecord> results = new ArrayList<>();
-private OnItemClick onItemClick;
+    private OnItemClick onItemClick;
     private Context context;
-    public CountryCodeAdapter(Context context,OnItemClick onItemClick) {
+
+    public CountryCodeAdapter(Context context, OnItemClick onItemClick) {
         this.context = context;
         this.onItemClick = onItemClick;
     }
@@ -54,12 +56,20 @@ private OnItemClick onItemClick;
                     ((SignUpActivity) context).signUpbutton.setVisibility(View.VISIBLE);
                     ((SignUpActivity) context).codeList.setVisibility(View.GONE);
                     ((SignUpActivity) context).countryCodeTV.setText(countryRecord.getPhonecode());
+                } else if (context instanceof LoginActivity) {
+
+                    onItemClick.onListItemClick(countryRecord.getId());
+                    System.out.println("---- instance of signup activity ------ ");
+                    ((LoginActivity) context).login.setVisibility(View.VISIBLE);
+                    ((LoginActivity) context).codeList.setVisibility(View.GONE);
+                    ((LoginActivity) context).countryCodeTV.setText(countryRecord.getPhonecode());
                 }
             }
         });
     }
-    public void setResults(List<CountryRecord> results) {
 
+
+    public void setResults(List<CountryRecord> results) {
         System.out.println("----- result size ------- " + results.size());
         this.results = results;
         notifyDataSetChanged();
@@ -72,8 +82,9 @@ private OnItemClick onItemClick;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView codeTV ;
-        public TextView codenameTV ;
+        public TextView codeTV;
+        public TextView codenameTV;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
