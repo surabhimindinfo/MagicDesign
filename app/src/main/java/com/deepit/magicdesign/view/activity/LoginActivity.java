@@ -18,6 +18,7 @@ import com.deepit.magicdesign.R;
 import com.deepit.magicdesign.adapter.CountryCodeAdapter;
 import com.deepit.magicdesign.model.CountryRecord;
 import com.deepit.magicdesign.model.OnItemClick;
+import com.deepit.magicdesign.model.UserRecord;
 import com.deepit.magicdesign.network.ApiController;
 import com.deepit.magicdesign.network.ApiInterface;
 import com.deepit.magicdesign.network.response.CountryCodeResponse;
@@ -193,6 +194,7 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
                 System.out.println("--- response login --- " + registerResponse);
                 assert registerResponse != null;
                 if (registerResponse.getStatus() == 1) {
+                    UserRecord.setUserRecord( registerResponse.getRecord());
                     startActivity(new Intent(LoginActivity.this, MainActivity.class)
                             .putExtra(LOGIN_TYPE, GUEST));
                     finish();

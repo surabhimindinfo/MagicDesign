@@ -30,7 +30,6 @@ import static com.deepit.magicdesign.Constant.REGISTER;
 public class BaseActivity extends AppCompatActivity {
 
 
-
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -45,14 +44,7 @@ public class BaseActivity extends AppCompatActivity {
     public void showSnackBar(final View mainLayout, final String msg) {
 
         Snackbar snackbar = Snackbar
-                .make(mainLayout, msg, Snackbar.LENGTH_LONG)
-                .setAction("UNDO", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Snackbar snackbar1 = Snackbar.make(mainLayout, "Network unavailable", Snackbar.LENGTH_SHORT);
-                        snackbar1.show();
-                    }
-                });
+                .make(mainLayout, msg, Snackbar.LENGTH_LONG);
 
         snackbar.show();
     }

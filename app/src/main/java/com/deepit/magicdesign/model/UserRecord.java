@@ -8,39 +8,63 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserRecord implements Parcelable {
 
+    private static UserRecord userRecord=null;
+
+    private UserRecord( ) {
+
+
+    }
+
+    public static UserRecord getUserRecord() {
+        return userRecord;
+    }
+
+    public static void setUserRecord(UserRecord userRecord) {
+        UserRecord.userRecord = userRecord;
+    }
+
+    public static UserRecord getInstance()
+    {
+        if (userRecord==null)
+            userRecord=new UserRecord();
+
+        return userRecord;
+    }
     @SerializedName("user_id")
     @Expose
-    private String userId;
+    public String userId;
     @SerializedName("name")
     @Expose
-    private String name;
+    public String name;
     @SerializedName("email")
     @Expose
-    private String email;
+    public String email;
     @SerializedName("mobile")
     @Expose
-    private String mobile;
+    public String mobile;
     @SerializedName("country_id")
     @Expose
-    private String countryId;
+    public String countryId;
+
+
     @SerializedName("country_name")
     @Expose
-    private String country_name;
+    public String countryName;
     @SerializedName("state")
     @Expose
-    private String state;
+    public String state;
     @SerializedName("city")
     @Expose
-    private String city;
+    public String city;
     @SerializedName("area")
     @Expose
-    private String area;
+    public String area;
     @SerializedName("create_date")
     @Expose
-    private String createDate;
+    public String createDate;
     @SerializedName("update_date")
     @Expose
-    private String updateDate;
+    public String updateDate;
 
 
 
@@ -49,8 +73,8 @@ public class UserRecord implements Parcelable {
         name = in.readString();
         email = in.readString();
         mobile = in.readString();
-        country_name = in.readString();
         countryId = in.readString();
+        countryName = in.readString();
         state = in.readString();
         city = in.readString();
         area = in.readString();
@@ -90,8 +114,8 @@ public class UserRecord implements Parcelable {
         return countryId;
     }
 
-    public String getCountry_name() {
-        return country_name;
+    public String getCountryName() {
+        return countryName ;
     }
 
     public String getState() {
@@ -126,11 +150,12 @@ public class UserRecord implements Parcelable {
         parcel.writeString(email);
         parcel.writeString(mobile);
         parcel.writeString(countryId);
+        parcel.writeString(countryName);
         parcel.writeString(state);
         parcel.writeString(city);
         parcel.writeString(area);
         parcel.writeString(createDate);
         parcel.writeString(updateDate);
-        parcel.writeString(country_name);
+
     }
 }

@@ -97,8 +97,6 @@ public class OtpActivity extends BaseActivity {
 
                 assert registerResponse != null;
                 if (registerResponse.getStatus() == 1) {
-
-
                     startActivity(new Intent(OtpActivity.this, EditAccountDetailActivity.class)
                             .putExtra(USER, registerResponse.getRecord()));
                     finish();

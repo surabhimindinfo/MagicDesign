@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.deepit.magicdesign.R;
+import com.deepit.magicdesign.model.UserRecord;
 import com.deepit.magicdesign.view.fragment.FragmentHome;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -30,7 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentHome fragmentHome = new FragmentHome();
         openFragment(fragmentHome);
 
+        UserRecord userRecord = UserRecord.getInstance();
+        System.out.println("-------- user name ---- " + userRecord.getName());
+        System.out.println("-------- country name ---- " + userRecord.getCountryName());
+
     }
+
 
     public void openFragment(Fragment fragment) {
 

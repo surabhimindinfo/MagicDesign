@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.deepit.magicdesign.R;
+import com.deepit.magicdesign.model.User;
 import com.deepit.magicdesign.model.UserRecord;
 import com.deepit.magicdesign.network.ApiController;
 import com.deepit.magicdesign.network.ApiInterface;
@@ -54,7 +55,13 @@ public class EditAccountDetailActivity extends BaseActivity {
             if (userRecord != null) {
                 etname.setText(userRecord.getName());
                 etMobile.setText(userRecord.getMobile());
-                etCountry.setText(userRecord.getCountry_name());
+                etCountry.setText(userRecord.getCountryName());
+                etEmail.setText(userRecord.getEmail());
+                etState.setText(userRecord.getState());
+                etCity.setText(userRecord.getCity());
+                etArea.setText(userRecord.getArea());
+
+                System.out.println("--country name for user ---  " +userRecord.getCountryName());
             }
         }
     }
@@ -92,6 +99,7 @@ public class EditAccountDetailActivity extends BaseActivity {
                     assert registerResponse != null;
                     if (registerResponse.getStatus() == 1) {
 
+                        UserRecord.setUserRecord( registerResponse.getRecord());
                         startActivity(new Intent(EditAccountDetailActivity.this, MainActivity.class));
                         finish();
                     }
