@@ -9,20 +9,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.deepit.magicdesign.model.CountryRecord;
 import com.deepit.magicdesign.network.ApiController;
 import com.deepit.magicdesign.network.ApiInterface;
 import com.deepit.magicdesign.network.response.RegisterResponse;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.deepit.magicdesign.Constant.LOGIN;
+import static com.deepit.magicdesign.Constant.REGISTER;
+
 public class BaseActivity extends AppCompatActivity {
 
-    // display a progress dialog
-    ProgressDialog progressDialog;
+
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -35,7 +42,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-    public void showSnackBar(final View mainLayout,final String msg) {
+    public void showSnackBar(final View mainLayout, final String msg) {
 
         Snackbar snackbar = Snackbar
                 .make(mainLayout, msg, Snackbar.LENGTH_LONG)
@@ -83,15 +90,13 @@ public class BaseActivity extends AppCompatActivity {
                                 .putExtra("mobile", mobile)
                                 .putExtra("country", country_id)
                                 .putExtra("name", name)
+                                .putExtra("type", REGISTER)
                                 .putExtra("device_id", device_id)
                         );
-                        finish();
                     }
                 }
                 Toast.makeText(context, registerResponse.getMessage(), Toast.LENGTH_LONG).show();
-
                 progressDialog.cancel();
-
             }
 
             @Override

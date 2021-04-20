@@ -56,6 +56,16 @@ public interface ApiInterface {
             @Field("device_id") String device_id
 
     );
+    @FormUrlEncoded
+    @POST("verify_login/index")
+    @Headers("x-api-key: 5eab42f448ef5a5c0722dd6308dd5543")
+    Call<VerifyResponse> verifyLoginOTP(
+            @Field("user_id") String user_id,
+            @Field("otp") String otp,
+             @Field("api_type") String api_type,
+            @Field("device_id") String device_id
+
+    );
 
     @FormUrlEncoded
     @POST("profile/index")

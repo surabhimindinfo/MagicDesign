@@ -53,15 +53,15 @@ public class CountryCodeAdapter extends RecyclerView.Adapter<CountryCodeAdapter.
 
                     onItemClick.onListItemClick(countryRecord.getId());
                     System.out.println("---- instance of signup activity ------ ");
+                    ((SignUpActivity) context).listLayout.setVisibility(View.GONE);
                     ((SignUpActivity) context).signUpbutton.setVisibility(View.VISIBLE);
-                    ((SignUpActivity) context).codeList.setVisibility(View.GONE);
-                    ((SignUpActivity) context).countryCodeTV.setText(countryRecord.getPhonecode());
-                } else if (context instanceof LoginActivity) {
+                     ((SignUpActivity) context).countryCodeTV.setText(countryRecord.getPhonecode());
 
+                } else if (context instanceof LoginActivity) {
                     onItemClick.onListItemClick(countryRecord.getId());
                     System.out.println("---- instance of signup activity ------ ");
-                    ((LoginActivity) context).login.setVisibility(View.VISIBLE);
-                    ((LoginActivity) context).codeList.setVisibility(View.GONE);
+                     ((LoginActivity) context).listLayout.setVisibility(View.GONE);
+                     ((LoginActivity) context).login.setVisibility(View.VISIBLE);
                     ((LoginActivity) context).countryCodeTV.setText(countryRecord.getPhonecode());
                 }
             }

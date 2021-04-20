@@ -55,8 +55,8 @@
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="@string/enter_your_name"
-
-        android:inputType="textPersonName"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+        android:inputType="text"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:textColor="@color/white"
@@ -140,11 +140,32 @@
 
         android:textStyle="bold" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/codeList"
+    <LinearLayout
+        android:id="@+id/listLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/countryCodeTV"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-         android:visibility="gone"/>
+        <EditText
+            android:id="@+id/searchET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/colorPrimary"
+            android:minHeight="50dp"
+            android:padding="8dp"
+            android:textColor="@color/colorPrimary"
+            tools:targetApi="m" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/codeList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+    </LinearLayout>
 </RelativeLayout>

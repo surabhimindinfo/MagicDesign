@@ -15,27 +15,32 @@ public class VerifyResponse {
     @Expose
     private UserRecord record;
 
+    @SerializedName("user_id")
+    @Expose
+    private String user_id;
+    @SerializedName("otp")
+    @Expose
+    private String otp;
+
     public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public UserRecord getRecord() {
         return record;
     }
 
-    public void setRecord(UserRecord record) {
-        this.record = record;
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public String getOtp() {
+        return otp;
     }
 }

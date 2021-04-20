@@ -8,5 +8,7 @@ public class Constant {
     public  static final String GUEST = "guest";
     public  static final String USER = "user";
     public  static String LOGIN_TYPE = "login_type";
+    public  static String LOGIN = "login";
+    public  static String REGISTER = "register";
 
 }

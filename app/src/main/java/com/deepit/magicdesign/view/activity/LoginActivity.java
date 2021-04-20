@@ -5,14 +5,18 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deepit.magicdesign.R;
 import com.deepit.magicdesign.adapter.CountryCodeAdapter;
+import com.deepit.magicdesign.model.CountryRecord;
 import com.deepit.magicdesign.model.OnItemClick;
 import com.deepit.magicdesign.network.ApiController;
 import com.deepit.magicdesign.network.ApiInterface;
@@ -24,11 +28,16 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.deepit.magicdesign.Constant.GUEST;
+import static com.deepit.magicdesign.Constant.LOGIN;
 import static com.deepit.magicdesign.Constant.LOGIN_TYPE;
 
 public class LoginActivity extends BaseActivity implements OnItemClick {
@@ -37,12 +46,14 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
     public TextView countryCodeTV;
     public EditText et_phone;
     public RecyclerView codeList;
+    public LinearLayout listLayout;
     public Button login;
     private String device_id;
     private CountryCodeViewModel viewModel;
     private CountryCodeAdapter codeAdapter;
     private String country_id = "";
     private boolean isListOpen = false;
+    private List<CountryRecord> results=new ArrayList<>();
 
     @SuppressLint("HardwareIds")
     @Override
@@ -61,6 +72,7 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
             public void onChanged(CountryCodeResponse response) {
                 if (response != null) {
                     System.out.println("----- country code response ---- " + response.getCountryRecord().size());
+                    results=response.getCountryRecord();
                     codeAdapter.setResults(response.getCountryRecord());
                 } else
                     Toast.makeText(LoginActivity.this, "Server not responding, Try again", Toast.LENGTH_LONG).show();
@@ -71,9 +83,24 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
         init();
     }
 
+    void filter(String text){
+        List<CountryRecord> temp = new ArrayList();
+        for(CountryRecord d:results){
+
+            if(d.getName().toLowerCase().contains(text)){
+                temp.add(d);
+            }
+        }
+        //update recyclerview
+        codeAdapter.setResults(temp);
+
+
+    }
     private void init() {
+
         login = findViewById(R.id.login);
         codeList = findViewById(R.id.codeList);
+        listLayout = findViewById(R.id.listLayout);
         et_phone = findViewById(R.id.et_phone);
         countryCodeTV = findViewById(R.id.countryCodeTV);
         codeList.setHasFixedSize(true);
@@ -87,15 +114,39 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
                 if (isListOpen) {
                     isListOpen = false;
                     login.setVisibility(View.VISIBLE);
-                    codeList.setVisibility(View.GONE);
+                     listLayout.setVisibility(View.GONE);
                 } else {
-                    login.setVisibility(View.GONE);
+
                     isListOpen = true;
-                    codeList.setVisibility(View.VISIBLE);
+                    login.setVisibility(View.GONE);
+                     listLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
 
+        EditText searchET = findViewById(R.id.searchET);
+        searchET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                System.out.println("-- entered string --- " + s.toString());
+                // filter your list from your input
+                filter(s.toString());
+                //you can use runnable postDelayed like 500 ms to delay search text
+            }
+        });
     }
 
     public void openMainPage(View view) {
@@ -139,7 +190,7 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
             public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
 
                 VerifyResponse registerResponse = response.body();
-
+                System.out.println("--- response login --- " + registerResponse);
                 assert registerResponse != null;
                 if (registerResponse.getStatus() == 1) {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class)
@@ -147,17 +198,26 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
                     finish();
 
                 } else if (registerResponse.getStatus() == 3) {
-                    registerUser("", mobile, country_id, device_id, LoginActivity.this);
+                    startActivity(new Intent(LoginActivity.this, OtpActivity.class)
+                            .putExtra("mobile", mobile)
+                            .putExtra("country", country_id)
+                            .putExtra("type", LOGIN)
+                            .putExtra("device_id", device_id)
+                            .putExtra("userID", registerResponse.getUser_id())
+                    );
                 }
                 Toast.makeText(LoginActivity.this, registerResponse.getMessage(), Toast.LENGTH_LONG).show();
 
                 progressDialog.cancel();
+                System.out.println(" ------- login status ----- " + registerResponse.getStatus());
+                System.out.println(" ------- login message ----- " + registerResponse.getMessage());
 
             }
 
             @Override
             public void onFailure(Call<VerifyResponse> call, Throwable t) {
                 progressDialog.cancel();
+                t.printStackTrace();
             }
         });
 
@@ -171,9 +231,14 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
 
     @Override
     public void onBackPressed() {
-        if (isListOpen)
-            codeList.setVisibility(View.GONE);
-        else
+        if (isListOpen) {
+            isListOpen=false;
+            login.setVisibility(View.VISIBLE);
+            listLayout.setVisibility(View.GONE);
+        }
+        else {
+
             super.onBackPressed();
+        }
     }
 }

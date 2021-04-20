@@ -4,14 +4,18 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deepit.magicdesign.R;
 import com.deepit.magicdesign.adapter.CountryCodeAdapter;
+import com.deepit.magicdesign.model.CountryRecord;
 import com.deepit.magicdesign.model.OnItemClick;
 import com.deepit.magicdesign.network.response.CountryCodeResponse;
 import com.deepit.magicdesign.viewmodel.CountryCodeViewModel;
@@ -21,11 +25,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.deepit.magicdesign.Constant.GUEST;
 import static com.deepit.magicdesign.Constant.LOGIN_TYPE;
 
 public class SignUpActivity extends BaseActivity implements OnItemClick {
-
+    public LinearLayout listLayout;
     public RecyclerView codeList;
     public Button signUpbutton;
     public TextView countryCodeTV;
@@ -34,6 +41,7 @@ public class SignUpActivity extends BaseActivity implements OnItemClick {
     private CountryCodeAdapter codeAdapter;
     private String country_id = "";
     private boolean isListOpen = false;
+    private List<CountryRecord> results=new ArrayList<>();
 
     @SuppressLint("HardwareIds")
     @Override
@@ -51,6 +59,8 @@ public class SignUpActivity extends BaseActivity implements OnItemClick {
             public void onChanged(CountryCodeResponse response) {
                 if (response != null) {
                     System.out.println("----- country code response ---- " + response.getCountryRecord().size());
+
+                    results=response.getCountryRecord();
                     codeAdapter.setResults(response.getCountryRecord());
                 } else
                     Toast.makeText(SignUpActivity.this, "Server not responding, Try again", Toast.LENGTH_LONG).show();
@@ -61,6 +71,7 @@ public class SignUpActivity extends BaseActivity implements OnItemClick {
     }
 
     private void init() {
+        listLayout = findViewById(R.id.listLayout);
         signUpbutton = findViewById(R.id.signUpbutton);
         codeList = findViewById(R.id.codeList);
         countryCodeTV = findViewById(R.id.countryCodeTV);
@@ -75,17 +86,54 @@ public class SignUpActivity extends BaseActivity implements OnItemClick {
                 if (isListOpen) {
                     isListOpen = false;
                     signUpbutton.setVisibility(View.VISIBLE);
-                    codeList.setVisibility(View.GONE);
+                    listLayout.setVisibility(View.GONE);
                 } else {
+                     isListOpen = true;
                     signUpbutton.setVisibility(View.GONE);
-                    isListOpen = true;
-                    codeList.setVisibility(View.VISIBLE);
+                    listLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
 
+
+        EditText searchET = findViewById(R.id.searchET);
+        searchET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                System.out.println("-- entered string --- " + s.toString());
+                // filter your list from your input
+                filter(s.toString());
+                //you can use runnable postDelayed like 500 ms to delay search text
+            }
+        });
     }
 
+    void filter(String text){
+        List<CountryRecord> temp = new ArrayList();
+        for(CountryRecord d:results){
+
+            if(d.getName().toLowerCase().contains(text)){
+                temp.add(d);
+            }
+        }
+        //update recyclerview
+        codeAdapter.setResults(temp);
+
+
+    }
     public void openLoginPage(View view) {
         startActivity(new Intent(SignUpActivity.this, LoginActivity.class)
                 .putExtra(LOGIN_TYPE, GUEST));
@@ -95,8 +143,11 @@ public class SignUpActivity extends BaseActivity implements OnItemClick {
     @Override
     public void onBackPressed() {
 
-        if (isListOpen)
-            codeList.setVisibility(View.GONE);
+        if (isListOpen) {
+            isListOpen=false;
+            listLayout.setVisibility(View.GONE);
+            signUpbutton.setVisibility(View.VISIBLE);
+         }
         else
             super.onBackPressed();
     }
