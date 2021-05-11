@@ -40,6 +40,9 @@ import retrofit2.Response;
 import static com.deepit.magicdesign.Constant.GUEST;
 import static com.deepit.magicdesign.Constant.LOGIN;
 import static com.deepit.magicdesign.Constant.LOGIN_TYPE;
+import static com.deepit.magicdesign.Constant.USER;
+import static com.deepit.magicdesign.network.MySharedPref.saveData;
+import static com.deepit.magicdesign.network.MySharedPref.saveUser;
 
 public class LoginActivity extends BaseActivity implements OnItemClick {
 
@@ -172,11 +175,6 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
     private void loginUseronServer(final String mobile, final String country_id,
                                    final String device_id) {
 
-        System.out.println(" ------- mobile ----- " + mobile);
-        System.out.println(" ------- country_id ----- " + country_id);
-        System.out.println(" ------- device_id ----- " + device_id);
-
-
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Please Wait");
@@ -191,12 +189,14 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
             public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
 
                 VerifyResponse registerResponse = response.body();
-                System.out.println("--- response login --- " + registerResponse);
-                assert registerResponse != null;
+                 assert registerResponse != null;
                 if (registerResponse.getStatus() == 1) {
                     UserRecord.setUserRecord( registerResponse.getRecord());
+                    saveData(getApplicationContext(), LOGIN_TYPE,USER);
+                    saveUser(getApplicationContext(), USER,registerResponse.getRecord());
+
                     startActivity(new Intent(LoginActivity.this, MainActivity.class)
-                            .putExtra(LOGIN_TYPE, GUEST));
+                            .putExtra(LOGIN_TYPE, USER));
                     finish();
 
                 } else if (registerResponse.getStatus() == 3) {

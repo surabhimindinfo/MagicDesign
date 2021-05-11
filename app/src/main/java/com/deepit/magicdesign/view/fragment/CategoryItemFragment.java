@@ -16,7 +16,7 @@ import com.deepit.magicdesign.R;
 import com.deepit.magicdesign.adapter.DesignAdapter;
 import com.deepit.magicdesign.view.activity.MainActivity;
 
-public class FragmentDesignCategory extends Fragment {
+public class CategoryItemFragment extends Fragment {
     View view;
     Context context;
 

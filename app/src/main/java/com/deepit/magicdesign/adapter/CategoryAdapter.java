@@ -11,31 +11,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.deepit.magicdesign.R;
-import com.deepit.magicdesign.model.Record;
+import com.deepit.magicdesign.model.Category;
 import com.deepit.magicdesign.view.activity.MainActivity;
-import com.deepit.magicdesign.view.fragment.CategoryItemFragment;
-import com.deepit.magicdesign.view.fragment.FragmentDesignList;
+import com.deepit.magicdesign.view.fragment.SubCategoryFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DesignAdapter extends RecyclerView.Adapter<DesignAdapter.ViewHolder> {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private final Context context;
     private final int tag;
-    private List<Record> results = new ArrayList<>();
+    private List<Category> results = new ArrayList<>();
 
-    public DesignAdapter(Context context, int tag) {
+    public CategoryAdapter(Context context, int tag, List<Category> category) {
         this.tag = tag;
         this.context = context;
+        this.results = category;
     }
-
-    public void setResults(List<Record> results) {
-        this.results = results;
-        System.out.println("---- result added  --- " + results.size());
-        notifyDataSetChanged();
-    }
-
 
     @NonNull
     @Override
@@ -48,35 +41,29 @@ public class DesignAdapter extends RecyclerView.Adapter<DesignAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
+        final Category record = results.get(position);
+        System.out.println("--- image on cat at design list  --- " + record.getCatImage());
 
-        final Record record = results.get(position);
-        if (tag == R.string.home)
-            Glide.with(holder.itemView).load(record.getMainImage()).into(holder.myimage);
-        else
-            Glide.with(holder.itemView).load(record.getSubImage()).into(holder.myimage);
+        Glide.with(holder.itemView).load(record.getCatImage()).into(holder.myimage);
 
 
         holder.myimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("--- clicked on cat at detail --- ");
+                System.out.println(context);
 
                 if (context instanceof MainActivity) {
+                    System.out.println("--- context of MainActivity --- ");
 
-                    switch (tag) {
-                        case R.string.home:
-                            System.out.println("--- clicked on cat at home --- ");
-                            FragmentDesignList fragmentDesignList = new FragmentDesignList();
-                            ((MainActivity) context).openFragment(fragmentDesignList, results.get(position), tag);
-                            break;
-                        case R.string.detail:
-                            CategoryItemFragment fragmentDesignCat = new CategoryItemFragment();
-                            ((MainActivity) context).openFragment(fragmentDesignCat, results.get(position), tag);
-                            break;
+                    if (tag == R.string.detail) {
+                        SubCategoryFragment fragmentDesignCat = new SubCategoryFragment();
+                        ((MainActivity) context).openFragment(fragmentDesignCat, results.get(position), tag);
                     }
-
                 }
             }
         });
+
     }
 
     @Override
@@ -90,10 +77,7 @@ public class DesignAdapter extends RecyclerView.Adapter<DesignAdapter.ViewHolder
 
         public ViewHolder(View itemView) {
             super(itemView);
-
             myimage = itemView.findViewById(R.id.myimage);
-
-
         }
     }
 }

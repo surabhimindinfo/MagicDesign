@@ -43,4 +43,10 @@
     <string name="contact_us">Contact Us</string>
     <string name="detail">Detail</string>
     <string name="select_country_code">Select Country  </string>
+    <string name="result_not_found">Result not found</string>
+    <string name="logout">Logout</string>
+    <string name="downloaded_files">Downloaded Designs</string>
+    <string name="my_profile">My Profile</string>
+    <string name="admin_message">Admin Messages</string>
+    <string name="guest">Guest</string>
 </resources>

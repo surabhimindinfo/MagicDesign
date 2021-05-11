@@ -1,8 +1,10 @@
 package com.deepit.magicdesign.network;
 
+import com.deepit.magicdesign.network.response.BannerResponse;
 import com.deepit.magicdesign.network.response.CountryCodeResponse;
 import com.deepit.magicdesign.network.response.MainDesignListResponse;
 import com.deepit.magicdesign.network.response.RegisterResponse;
+import com.deepit.magicdesign.network.response.SubCategoryResponse;
 import com.deepit.magicdesign.network.response.VerifyResponse;
 
 import retrofit2.Call;
@@ -16,6 +18,11 @@ public interface ApiInterface {
     @POST("main_category/index")
     @Headers("x-api-key: 5eab42f448ef5a5c0722dd6308dd5543")
     Call<MainDesignListResponse> getMainDesignList();
+
+
+    @POST("banner/index")
+    @Headers("x-api-key: 5eab42f448ef5a5c0722dd6308dd5543")
+    Call<BannerResponse> getBanner();
 
     @POST("country/index")
     @Headers("x-api-key: 5eab42f448ef5a5c0722dd6308dd5543")
@@ -78,6 +85,14 @@ public interface ApiInterface {
              @Field("state") String state,
              @Field("city") String city,
             @Field("area") String area
+
+    );
+    @FormUrlEncoded
+    @POST("sub_category/index")
+    @Headers("x-api-key: 5eab42f448ef5a5c0722dd6308dd5543")
+    Call<SubCategoryResponse> getSubCategory(
+            @Field("main_category_id") String main_category_id,
+            @Field("category_id") String category_id
 
     );
 

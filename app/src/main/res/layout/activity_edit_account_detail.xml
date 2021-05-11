@@ -1,191 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:id="@+id/mainLayout"
+    android:orientation="vertical"
     tools:context=".view.activity.EditAccountDetailActivity">
 
     <LinearLayout
-        android:padding="10dp"
-        android:gravity="center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:padding="10dp">
 
         <ImageView
-            android:layout_weight="1"
-            android:padding="8dp"
-            android:src="@drawable/ic_menu"
+            android:id="@+id/menuBtn"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:id="@+id/menuBtn" />
-
-        <ImageView
             android:layout_weight="1"
             android:padding="8dp"
-            android:src="@drawable/ic_home"
+            android:src="@drawable/ic_menu" />
+
+        <ImageView
             android:layout_width="0dp"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:src="@drawable/ic_home" />
 
         <TextView
-            android:layout_weight="5"
-            android:textStyle="bold"
-            android:textSize="22sp"
-            android:textColor="@color/white"
-            android:text="@string/my_account"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_height="wrap_content" />
+            android:layout_weight="5"
+            android:text="@string/my_account"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
 
         <TextView
-            android:onClick="openMainPage"
-            android:layout_weight="3"
             android:id="@+id/tv_skip"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:drawablePadding="4dp"
             android:gravity="center"
+            android:onClick="openMainPage"
             android:padding="8dp"
             android:text="@string/skip"
             android:textColor="@color/white"
+            app:drawableEndCompat="@drawable/ic_right_arrow"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="312dp"
-            tools:layout_editor_absoluteY="-2dp"
-            app:drawableEndCompat="@drawable/ic_right_arrow" />
+            tools:layout_editor_absoluteY="-2dp" />
     </LinearLayout>
 
-    <ScrollView
-        android:padding="20dp"
-        android:background="@drawable/white_bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/name"
-                    android:minHeight="50dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:id="@+id/etMobile"
-                    android:enabled="false"
-
-                    android:hint="@string/mobile_number"
-                    android:minHeight="50dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:hint="@string/email"
-                    android:minHeight="50dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etCountry"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="@string/country"
-                    android:minHeight="50dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etState"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/state"
-                    android:minHeight="50dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/city"
-                    android:minHeight="50dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etArea"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/area"
-                    android:minHeight="50dp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <Button
-                android:textSize="12sp"
-                android:textColor="@color/white"
-                android:text="@string/submit"
-                android:background="@drawable/btn_blue"
-                android:layout_marginTop="40dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:onClick="upDateProfile"
-                android:id="@+id/submtBtn"
-                tools:ignore="OnClick" />
-
-
-        </LinearLayout>
-    </ScrollView>
-
+    <include layout="@layout/account_layout" />
 </LinearLayout>

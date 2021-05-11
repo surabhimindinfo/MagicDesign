@@ -65,6 +65,9 @@ public class UserRecord implements Parcelable {
     @SerializedName("update_date")
     @Expose
     public String updateDate;
+    @SerializedName("phonecode")
+    @Expose
+    public String phoneCode;
 
 
 
@@ -80,6 +83,7 @@ public class UserRecord implements Parcelable {
         area = in.readString();
         createDate = in.readString();
         updateDate = in.readString();
+        phoneCode = in.readString();
     }
 
     public static final Creator<UserRecord> CREATOR = new Creator<UserRecord>() {
@@ -138,6 +142,10 @@ public class UserRecord implements Parcelable {
         return updateDate;
     }
 
+    public String getPhoneCode() {
+        return phoneCode;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -156,6 +164,7 @@ public class UserRecord implements Parcelable {
         parcel.writeString(area);
         parcel.writeString(createDate);
         parcel.writeString(updateDate);
+        parcel.writeString(phoneCode);
 
     }
 }

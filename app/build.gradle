@@ -11,6 +11,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                def appName = "Magic Design"
+                outputFileName = appName + getDateTime() +".apk"
+            }
+        }
+
     }
 
     buildTypes {
@@ -19,8 +26,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
+static def getDateTime() {
+    DateFormat df = new SimpleDateFormat("dd MMM yyyy")
+
+    return df.format(new Date())
+}
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'

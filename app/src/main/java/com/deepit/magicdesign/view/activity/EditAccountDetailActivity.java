@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.deepit.magicdesign.R;
-import com.deepit.magicdesign.model.User;
 import com.deepit.magicdesign.model.UserRecord;
 import com.deepit.magicdesign.network.ApiController;
 import com.deepit.magicdesign.network.ApiInterface;
@@ -19,13 +18,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.deepit.magicdesign.Constant.GUEST;
 import static com.deepit.magicdesign.Constant.LOGIN_TYPE;
 import static com.deepit.magicdesign.Constant.USER;
 
 public class EditAccountDetailActivity extends BaseActivity {
 
-    private EditText etname, etMobile, etEmail, etCountry, etState, etCity, etArea;
+    private EditText etname;
+    private EditText etEmail;
+    private EditText etState;
+    private EditText etCity;
+    private EditText etArea;
     private LinearLayout mainLayout;
     private UserRecord userRecord = null;
 
@@ -41,9 +43,9 @@ public class EditAccountDetailActivity extends BaseActivity {
 
         mainLayout = findViewById(R.id.mainLayout);
         etname = findViewById(R.id.etName);
-        etMobile = findViewById(R.id.etMobile);
+        EditText etMobile = findViewById(R.id.etMobile);
         etEmail = findViewById(R.id.etEmail);
-        etCountry = findViewById(R.id.etCountry);
+        EditText etCountry = findViewById(R.id.etCountry);
         etCity = findViewById(R.id.etCity);
         etState = findViewById(R.id.etState);
         etArea = findViewById(R.id.etArea);
@@ -61,14 +63,19 @@ public class EditAccountDetailActivity extends BaseActivity {
                 etCity.setText(userRecord.getCity());
                 etArea.setText(userRecord.getArea());
 
-                System.out.println("--country name for user ---  " +userRecord.getCountryName());
+                System.out.println("--country name for user ---  " + userRecord.getCountryName());
             }
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        openMainPage(null);
+    }
+
     public void openMainPage(View view) {
         startActivity(new Intent(EditAccountDetailActivity.this, MainActivity.class)
-                .putExtra(LOGIN_TYPE, GUEST));
+                .putExtra(LOGIN_TYPE, USER));
         finish();
 
     }
@@ -99,7 +106,7 @@ public class EditAccountDetailActivity extends BaseActivity {
                     assert registerResponse != null;
                     if (registerResponse.getStatus() == 1) {
 
-                        UserRecord.setUserRecord( registerResponse.getRecord());
+                        UserRecord.setUserRecord(registerResponse.getRecord());
                         startActivity(new Intent(EditAccountDetailActivity.this, MainActivity.class));
                         finish();
                     }

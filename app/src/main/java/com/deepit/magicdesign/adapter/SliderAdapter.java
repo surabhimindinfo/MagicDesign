@@ -8,20 +8,19 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.deepit.magicdesign.R;
-import com.deepit.magicdesign.model.SliderData;
+import com.deepit.magicdesign.model.Banner;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapterViewHolder> {
 
     // list for storing urls of images.
-    private final List<SliderData> mSliderItems;
+    private List<Banner> mSliderItems;
 
     // Constructor
-    public SliderAdapter(Context context, ArrayList<SliderData> sliderDataArrayList) {
-        this.mSliderItems = sliderDataArrayList;
+    public SliderAdapter(Context context) {
+
     }
 
     // We are inflating the slider_layout
@@ -37,14 +36,16 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
     @Override
     public void onBindViewHolder(SliderAdapterViewHolder viewHolder, final int position) {
 
-        final SliderData sliderItem = mSliderItems.get(position);
-
-        // Glide is use to load image
-        // from url in your imageview.
+        final Banner sliderItem = mSliderItems.get(position);
         Glide.with(viewHolder.itemView)
-                .load(sliderItem.getImgUrl())
+                .load(sliderItem.getImage())
                 .fitCenter()
                 .into(viewHolder.imageViewBackground);
+    }
+
+    public void setResults(List<Banner> results) {
+        this.mSliderItems = results;
+        notifyDataSetChanged();
     }
 
     // this method will return

@@ -3,28 +3,24 @@ package com.deepit.magicdesign.view.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.deepit.magicdesign.model.CountryRecord;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.deepit.magicdesign.network.ApiController;
 import com.deepit.magicdesign.network.ApiInterface;
 import com.deepit.magicdesign.network.response.RegisterResponse;
 import com.google.android.material.snackbar.Snackbar;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.deepit.magicdesign.Constant.LOGIN;
 import static com.deepit.magicdesign.Constant.REGISTER;
 
 public class BaseActivity extends AppCompatActivity {
@@ -51,10 +47,6 @@ public class BaseActivity extends AppCompatActivity {
 
     public void registerUser(final String name, final String mobile, final String country_id, final String device_id,
                              final Context context) {
-
-        System.out.println(" ------- mobile ----- " + mobile);
-        System.out.println(" ------- country_id ----- " + country_id);
-        System.out.println(" ------- device_id ----- " + device_id);
 
 
         final ProgressDialog progressDialog = new ProgressDialog(context);
@@ -99,5 +91,6 @@ public class BaseActivity extends AppCompatActivity {
 
 
     }
+
 
 }

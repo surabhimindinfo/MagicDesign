@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deepit.magicdesign.R;
+import com.deepit.magicdesign.model.UserRecord;
 import com.deepit.magicdesign.network.ApiController;
 import com.deepit.magicdesign.network.ApiInterface;
 import com.deepit.magicdesign.network.response.VerifyResponse;
@@ -21,6 +22,8 @@ import static com.deepit.magicdesign.Constant.GUEST;
 import static com.deepit.magicdesign.Constant.LOGIN_TYPE;
 import static com.deepit.magicdesign.Constant.REGISTER;
 import static com.deepit.magicdesign.Constant.USER;
+import static com.deepit.magicdesign.network.MySharedPref.saveData;
+import static com.deepit.magicdesign.network.MySharedPref.saveUser;
 
 public class OtpActivity extends BaseActivity {
 
@@ -97,8 +100,11 @@ public class OtpActivity extends BaseActivity {
 
                 assert registerResponse != null;
                 if (registerResponse.getStatus() == 1) {
-                    startActivity(new Intent(OtpActivity.this, EditAccountDetailActivity.class)
-                            .putExtra(USER, registerResponse.getRecord()));
+                    UserRecord.setUserRecord(registerResponse.getRecord());
+                    saveData(getApplicationContext(), LOGIN_TYPE,USER);
+                    saveUser(getApplicationContext(), USER,registerResponse.getRecord());
+                    startActivity(new Intent(OtpActivity.this, MainActivity.class)
+                           );
                     finish();
 
                 }
@@ -118,9 +124,6 @@ public class OtpActivity extends BaseActivity {
 
     private void verifyOtp(String mobile, String name, String countryId, String deviceId, String strOtp) {
 
-        System.out.println(" ------- mobile ----- " + mobile);
-        System.out.println(" ------- country_id ----- " + countryId);
-        System.out.println(" ------- device_id ----- " + deviceId);
         final ProgressDialog progressDialog = new ProgressDialog(OtpActivity.this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Please Wait");
@@ -140,7 +143,8 @@ public class OtpActivity extends BaseActivity {
                 assert registerResponse != null;
                 if (registerResponse.getStatus() == 1) {
 
-
+                    saveData(getApplicationContext(), LOGIN_TYPE,USER);
+                    saveUser(getApplicationContext(), USER,registerResponse.getRecord());
                     startActivity(new Intent(OtpActivity.this, EditAccountDetailActivity.class)
                             .putExtra(USER, registerResponse.getRecord()));
                     finish();
