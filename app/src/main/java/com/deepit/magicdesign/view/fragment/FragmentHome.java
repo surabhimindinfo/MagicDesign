@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.deepit.magicdesign.R;
-import com.deepit.magicdesign.adapter.DesignAdapter;
+import com.deepit.magicdesign.adapter.MainCategoryAdapter;
 import com.deepit.magicdesign.adapter.SliderAdapter;
 import com.deepit.magicdesign.model.Banner;
 import com.deepit.magicdesign.network.response.BannerResponse;
@@ -30,7 +30,7 @@ public class FragmentHome extends Fragment {
     ArrayList<Banner> sliderDataArrayList = new ArrayList<>();
     private Context context;
     private MainDesignViewModel viewModel;
-    private DesignAdapter adapter;
+    private MainCategoryAdapter adapter;
     private SliderAdapter sliderAdapter;
 
     @Override
@@ -38,7 +38,7 @@ public class FragmentHome extends Fragment {
         super.onCreate(savedInstanceState);
         context = getContext();
         System.out.println("---- context at fragment --- " + context);
-        adapter = new DesignAdapter(context, R.string.home);
+        adapter = new MainCategoryAdapter(context, R.string.home);
         sliderAdapter = new SliderAdapter(context);
 
         viewModel = new ViewModelProvider(this).get(MainDesignViewModel.class);

@@ -49,4 +49,24 @@
     <string name="my_profile">My Profile</string>
     <string name="admin_message">Admin Messages</string>
     <string name="guest">Guest</string>
+    <string name="filter">Filter</string>
+    <string name="sort_by">Sort by</string>
+    <string name="refine_results">Refine Results</string>
+    <string name="clear_filter">Clear Filter</string>
+    <string name="apply_filter">Apply Filters</string>
+    <string name="design_hint">System will show design according to your machine requirements.</string>
+    <string name="machine_support_format">Which file format does support in your machine?</string>
+    <string name="step_count">1 of 3 steps</string>
+    <string name="step_count2">2 of 3 steps</string>
+    <string name="step_count3">3 of 3 steps</string>
+    <string name="cat_support_format">In which category you are working?</string>
+    <string name="subcat_support_format">In Which saree category you are working?</string>
+    <string name="item_detail">Item Detail</string>
+    <string name="code">Code :<![CDATA[<b><font color=#33C1FF> %1$s</font></b>]]></string>
+    <string name="stitch">Stitch :<![CDATA[<b><font color=#33C1FF> %1$s</font></b>]]></string>
+    <string name="width">Width :<![CDATA[<b><font color=#33C1FF> %1$s</font></b>]]></string>
+    <string name="height">Height :<![CDATA[<b><font color=#33C1FF> %1$s</font></b>]]></string>
+    <string name="needle">Needle :<![CDATA[<b><font color=#33C1FF> %1$s</font></b>]]></string>
+<!--    <string name="code">Code :<font color='#33C1FF'> %1$s</font></string>-->
+    <string name="download">Download</string>
 </resources>

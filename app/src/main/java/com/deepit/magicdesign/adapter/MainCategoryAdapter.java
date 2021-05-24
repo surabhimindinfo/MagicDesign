@@ -14,18 +14,18 @@ import com.deepit.magicdesign.R;
 import com.deepit.magicdesign.model.Record;
 import com.deepit.magicdesign.view.activity.MainActivity;
 import com.deepit.magicdesign.view.fragment.CategoryItemFragment;
-import com.deepit.magicdesign.view.fragment.FragmentDesignList;
+import com.deepit.magicdesign.view.fragment.CategoryFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DesignAdapter extends RecyclerView.Adapter<DesignAdapter.ViewHolder> {
+public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapter.ViewHolder> {
 
     private final Context context;
     private final int tag;
     private List<Record> results = new ArrayList<>();
 
-    public DesignAdapter(Context context, int tag) {
+    public MainCategoryAdapter(Context context, int tag) {
         this.tag = tag;
         this.context = context;
     }
@@ -65,7 +65,7 @@ public class DesignAdapter extends RecyclerView.Adapter<DesignAdapter.ViewHolder
                     switch (tag) {
                         case R.string.home:
                             System.out.println("--- clicked on cat at home --- ");
-                            FragmentDesignList fragmentDesignList = new FragmentDesignList();
+                            CategoryFragment fragmentDesignList = new CategoryFragment();
                             ((MainActivity) context).openFragment(fragmentDesignList, results.get(position), tag);
                             break;
                         case R.string.detail:

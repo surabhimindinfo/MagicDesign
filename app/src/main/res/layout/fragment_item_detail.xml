@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/white_bg"
+    android:paddingLeft="20dp"
+    android:paddingTop="30dp"
+    android:paddingRight="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <TextView
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:id="@+id/codeTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="@string/code" />
+
+            <TextView
+
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:id="@+id/stitchTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/stitch" />
+
+            <TextView
+
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:id="@+id/widthTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/width" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <TextView
+
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:id="@+id/heightTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/height" />
+
+            <TextView
+
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:id="@+id/needleTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/needle" />
+
+            <TextView
+
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:id="@+id/catTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#33C1FF" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/itemImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:scaleType="fitXY" />
+
+        <Button
+            android:layout_marginBottom="20dp"
+            android:id="@+id/btn_download"
+            android:layout_width="120dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/btn_blue"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/download"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</ScrollView>

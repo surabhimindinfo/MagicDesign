@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <CheckedTextView
+        android:id="@+id/textTV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="18dp"
+        android:checked="false"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:textSize="14sp"
+        android:checkMark="@drawable/ic_uncheck"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/opensans_semibold"
+        android:textColor="@color/gray"
+         />
+</LinearLayout>

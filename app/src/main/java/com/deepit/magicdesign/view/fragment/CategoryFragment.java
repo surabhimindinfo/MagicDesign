@@ -19,7 +19,7 @@ import com.deepit.magicdesign.view.activity.MainActivity;
 
 import static com.deepit.magicdesign.Constant.TITLE;
 
-public class FragmentDesignList extends Fragment {
+public class CategoryFragment extends Fragment {
 
     private Record record;
 

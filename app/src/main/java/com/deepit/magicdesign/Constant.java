@@ -13,5 +13,6 @@ public class Constant {
     public  static String REGISTER = "register";
     public  static String TITLE = "title";
     public  static String TAG = "tag";
+    public  static String JPG_FORMAT = "JPG";
 
 }

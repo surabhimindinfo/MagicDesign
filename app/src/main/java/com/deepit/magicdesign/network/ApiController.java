@@ -2,6 +2,16 @@ package com.deepit.magicdesign.network;
 
 import android.text.TextUtils;
 
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.Cache;
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -18,6 +28,7 @@ public class ApiController {
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
                     .baseUrl(BASE_URL)
+                    .client(getUnsafeHttp())
                     .addConverterFactory(GsonConverterFactory.create());
 
     private static Retrofit retrofit = builder.build();
@@ -54,5 +65,23 @@ public class ApiController {
         return retrofit.create(serviceClass);
     }
 
-
+    private static OkHttpClient getUnsafeHttp()
+    {
+        OkHttpClient client=new OkHttpClient();
+        try {
+            TLSSocketFactory tlsSocketFactory=new TLSSocketFactory();
+            if (tlsSocketFactory.getTrustManager()!=null) {
+                client = new OkHttpClient.Builder()
+                        .sslSocketFactory(tlsSocketFactory, tlsSocketFactory.getTrustManager())
+                        .build();
+            }
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        }
+        return client;
+    }
 }

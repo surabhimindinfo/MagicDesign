@@ -16,10 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.deepit.magicdesign.R;
-import com.deepit.magicdesign.adapter.CategoryAdapter;
-import com.deepit.magicdesign.adapter.DesignAdapter;
+import com.deepit.magicdesign.adapter.MainCategoryAdapter;
 import com.deepit.magicdesign.model.Category;
-import com.deepit.magicdesign.model.Record;
 import com.deepit.magicdesign.network.response.SubCategoryResponse;
 import com.deepit.magicdesign.view.activity.MainActivity;
 import com.deepit.magicdesign.viewmodel.SubCatViewModel;
@@ -29,10 +27,9 @@ import static com.deepit.magicdesign.Constant.TITLE;
 
 public class SubCategoryFragment extends Fragment {
 
-    private View view;
     private Context context;
     private SubCatViewModel viewModel;
-    private DesignAdapter adapter;
+    private MainCategoryAdapter adapter;
     private Category record;
     private int tag;
 
@@ -40,7 +37,7 @@ public class SubCategoryFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getContext();
-        adapter = new DesignAdapter(context, R.string.detail);
+        adapter = new MainCategoryAdapter(context, R.string.detail);
         viewModel = new ViewModelProvider(this).get(SubCatViewModel.class);
         viewModel.init();
         viewModel.getSubCategoryResponseLiveData().observe(this, new Observer<SubCategoryResponse>() {
@@ -51,8 +48,11 @@ public class SubCategoryFragment extends Fragment {
                     System.out.println("------ size subcat-----");
                 if(subCategoryResponse.getSubCategory()!=null)
                      adapter.setResults(subCategoryResponse.getSubCategory());
-                } else {
+                else
                     Toast.makeText(context,subCategoryResponse.getMessage(),Toast.LENGTH_LONG).show();
+
+                } else {
+                    Toast.makeText(context,"Server not responding!",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -68,7 +68,7 @@ public class SubCategoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_designer_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_designer_detail, container, false);
         context = getContext();
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         TextView noResultTV = view.findViewById(R.id.noResultTV);

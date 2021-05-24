@@ -44,10 +44,15 @@ public class Record implements Parcelable {
     @SerializedName("main_short_desc")
     @Expose
     private String mainShortDesc;
+    @SerializedName("category_id")
+    @Expose
+    private String category_id;
 
     @SerializedName("category")
     @Expose
     private List<Category> category = null;
+
+
     protected Record(Parcel in) {
         subcategoryId = in.readString();
         subName = in.readString();
@@ -57,7 +62,9 @@ public class Record implements Parcelable {
         mainName = in.readString();
         mainImage = in.readString();
         mainShortDesc = in.readString();
+        category_id = in.readString();
      }
+
 
     public String getSubcategoryId() {
         return subcategoryId;
@@ -103,9 +110,6 @@ public class Record implements Parcelable {
         return mainShortDesc;
     }
 
-    public void setMainShortDesc(String mainShortDesc) {
-        this.mainShortDesc = mainShortDesc;
-    }
 
 
 
@@ -115,6 +119,10 @@ public class Record implements Parcelable {
 
     public void setCategory(List<Category> category) {
         this.category = category;
+    }
+
+    public String getCategory_id() {
+        return category_id;
     }
 
     @Override
@@ -132,5 +140,6 @@ public class Record implements Parcelable {
         dest.writeString(mainName);
         dest.writeString(mainImage);
         dest.writeString(mainShortDesc);
+        dest.writeString(category_id);
      }
 }

@@ -23,12 +23,30 @@ public class Category implements Parcelable {
     @Expose
     private String main_category_id;
 
+
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("checked")
+    @Expose
+    private Integer checked;
+
     protected Category(Parcel in) {
         categoryId = in.readString();
         catName = in.readString();
         catShortDesc = in.readString();
         catImage = in.readString();
         main_category_id = in.readString();
+        name = in.readString();
+        checked = in.readInt();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getChecked() {
+        return checked;
     }
 
     public static final Creator<Category> CREATOR = new Creator<Category>() {
@@ -72,6 +90,8 @@ public class Category implements Parcelable {
         dest.writeString(catShortDesc);
         dest.writeString(catImage);
         dest.writeString(main_category_id);
+        dest.writeString(name);
+        dest.writeInt(checked);
     }
 
 }

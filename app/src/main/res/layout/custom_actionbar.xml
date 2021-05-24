@@ -29,9 +29,9 @@
         android:fontFamily="@font/opensans_bold"
         android:gravity="center_vertical"
         android:minHeight="50dp"
-        android:text="Home"
+        android:text="@string/home"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"/>
 
     <ImageView

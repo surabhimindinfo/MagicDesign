@@ -15,36 +15,20 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.deepit.magicdesign.R;
-import com.deepit.magicdesign.adapter.DesignAdapter;
-import com.deepit.magicdesign.adapter.SliderAdapter;
-import com.deepit.magicdesign.model.Banner;
-import com.deepit.magicdesign.model.Record;
 import com.deepit.magicdesign.model.UserRecord;
 import com.deepit.magicdesign.network.ApiController;
 import com.deepit.magicdesign.network.ApiInterface;
-import com.deepit.magicdesign.network.response.BannerResponse;
-import com.deepit.magicdesign.network.response.MainDesignListResponse;
 import com.deepit.magicdesign.network.response.VerifyResponse;
 import com.deepit.magicdesign.view.activity.BaseActivity;
-import com.deepit.magicdesign.view.activity.EditAccountDetailActivity;
 import com.deepit.magicdesign.view.activity.MainActivity;
-import com.deepit.magicdesign.viewmodel.MainDesignViewModel;
-import com.smarteist.autoimageslider.SliderView;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.deepit.magicdesign.Constant.TITLE;
-import static com.deepit.magicdesign.Constant.USER;
 
 public class AccountFragment extends Fragment {
     private EditText etname;
@@ -66,11 +50,6 @@ public class AccountFragment extends Fragment {
     }
     private void updateProfile(String name, String email,
                                String city, String state, String area) {
-
-
-        {
-
-
             final ProgressDialog progressDialog = new ProgressDialog(context);
             progressDialog.setCancelable(false);
             progressDialog.setMessage("Please Wait");
@@ -106,8 +85,6 @@ public class AccountFragment extends Fragment {
                 }
             });
 
-
-        }
     }
 
     public void upDateProfile( ) {
