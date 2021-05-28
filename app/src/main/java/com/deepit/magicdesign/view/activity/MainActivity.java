@@ -4,14 +4,11 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +27,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.DownloadListener;
 import com.deepit.magicdesign.Constant;
 import com.deepit.magicdesign.R;
 import com.deepit.magicdesign.model.File;
@@ -42,10 +42,9 @@ import com.deepit.magicdesign.viewmodel.SubCatViewModel;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
@@ -58,6 +57,7 @@ import static com.deepit.magicdesign.network.MySharedPref.getUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = "Download";
     public ImageView btn_menu;
     public TextView tvHead;
     private DrawerLayout dLayout;
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
         FragmentHome fragmentHome = new FragmentHome();
         openFragment(fragmentHome, null, 0);
+        AndroidNetworking.initialize(getApplicationContext());
 
         String login_type = getData(MainActivity.this, LOGIN_TYPE, null);
 
@@ -83,10 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             userRecord = getUser(MainActivity.this, USER, null);
             Gson gson = new Gson();
             String json = gson.toJson(userRecord);
-            System.out.println(" ---- user ---- " + json);
             if (userRecord != null) {
-                System.out.println("--- user available---");
-
                 nameTV.setText(userRecord.getName());
                 numberTV.setText("(" + userRecord.getPhoneCode() + ")" + userRecord.getMobile());
                 navigationView.getMenu().clear(); //clear old inflated items.
@@ -121,9 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fragmentTransaction.addToBackStack(fragment.toString());
 
         }
-
         fragmentTransaction.replace(R.id.content_frame, fragment);
-
         fragmentTransaction.commit(); // save the changes
     }
 
@@ -222,21 +218,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < files.size(); i++) {
 
             File file = files.get(i);
-
-            String downLoadURl = file.getFile();
-            runDownloadVM(downLoadURl);
+            runDownloadVM(file);
             CheckDownLoadAvailabitlity(item_id);
         }
     }
 
-    private void runDownloadVM(final String file) {
+    private void runDownloadVM(final File file) {
         viewModel.downloadResponseLiveData().observe(this, new Observer<FormatPrefResponse>() {
             @Override
             public void onChanged(FormatPrefResponse itemResponse) {
                 if (itemResponse != null) {
-                    System.out.println("------ filter----");
                     if (itemResponse.getStatus() == 1) {
                         downLoadFile(file);
+
                     } else
                         Toast.makeText(MainActivity.this, itemResponse.getMessage(), Toast.LENGTH_LONG).show();
 
@@ -246,9 +240,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void downLoadFile(String file) {
+    private void downLoadFile(File file) {
 
-        System.out.println("--- downLoad FIle --- " + file);
 
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED &&
@@ -260,7 +253,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             Toast.makeText(MainActivity.this, "Downloading Image...", Toast.LENGTH_LONG).show();
             //Asynctask to create a thread to downlaod image in the background
-            new DownloadsImage().execute(file);
+
+            String fileName = file.getFileId() + ".jpeg";
+
+            String dirPath = Environment.getExternalStorageDirectory()
+                    + "/Android/data/"
+                    + getApplicationContext().getPackageName()
+                    + "/Files";
+//            downloadImageFromUrl(file.getFile(), dirPath, fileName);
+            new DownloadTask().execute(file.getFile());
+            System.out.println("--- downLoad FIle --- " + fileName);
         }
     }
 
@@ -268,61 +270,115 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewModel.checkDownload(userRecord.getUserId(), item_id);
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private class DownloadsImage extends AsyncTask<String, Void, Void> {
+    private void downloadImageFromUrl(final String file, String dirPath, String fileName) {
+        AndroidNetworking.download(file, dirPath, fileName)
+                .build()
+                .startDownload(new DownloadListener() {
+                    @Override
+                    public void onDownloadComplete() {
+                        Log.w("Download : ", file);
+                        Toast.makeText(MainActivity.this, "Image downloaded successfully", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(MainActivity.this, "Download Failed", Toast.LENGTH_LONG).show();
+
+                        anError.getCause().printStackTrace();
+                    }
+                });
+
+    }
+
+    class DownloadTask extends AsyncTask<String, Void, Void> {
+        java.io.File apkStorage = null;
+        java.io.File outputFile = null;
+
 
         @Override
         protected Void doInBackground(String... strings) {
-            URL url = null;
             try {
-                url = new URL(strings[0]);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
-            Bitmap bm = null;
-            try {
-                bm = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                URL url = new URL(strings[0]);//Create Download URl
+                HttpURLConnection c = (HttpURLConnection) url.openConnection();//Open Url Connection
+                c.setRequestMethod("GET");//Set Request Method to "GET" since we are grtting data
+                c.connect();//connect the URL Connection
 
-            //Create Path to save Image
-            java.io.File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/Magic Design"); //Creates app specific folder
+                //If Connection response is not OK then show Logs
+                if (c.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    Log.e(TAG, "Server returned HTTP " + c.getResponseCode()
+                            + " " + c.getResponseMessage());
 
-            if (!path.exists()) {
-                path.mkdirs();
-            }
+                }
+                String downloadFileName = "IMG_" + System.currentTimeMillis() + ".jpeg";
+                apkStorage = new java.io.File(Environment.getExternalStorageDirectory() + "/Magic-Design/images");
 
-            java.io.File imageFile = new java.io.File(path, System.currentTimeMillis() + ".png"); // Imagename.png
-            FileOutputStream out = null;
-            try {
-                out = new FileOutputStream(imageFile);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
-                bm.compress(Bitmap.CompressFormat.PNG, 100, out); // Compress Image
-                out.flush();
-                out.close();
-                // Tell the media scanner about the new file so that it is
-                // immediately available to the user.
-                MediaScannerConnection.scanFile(MainActivity.this, new String[]{imageFile.getAbsolutePath()}, null, new MediaScannerConnection.OnScanCompletedListener() {
-                    public void onScanCompleted(String path, Uri uri) {
-                        // Log.i("ExternalStorage", "Scanned " + path + ":");
-                        //    Log.i("ExternalStorage", "-> uri=" + uri);
-                    }
-                });
+                //If File is not present create directory
+                if (!apkStorage.exists()) {
+                    apkStorage.mkdir();
+                    Log.e(TAG, "Directory Created." +apkStorage.getAbsolutePath());
+                }
+
+                outputFile = new java.io.File(apkStorage, downloadFileName);//Create Output file in Main File
+                System.out.println("-- output file : " + outputFile);
+                //Create New File if not present
+                if (!outputFile.getParentFile().exists()) {
+                    outputFile.getParentFile().mkdir();
+                    Log.e(TAG, "File Created");
+                } if (!outputFile.exists()) {
+                    outputFile.createNewFile();
+                    Log.e(TAG, "File Created");
+                }
+
+                FileOutputStream fos = new FileOutputStream(outputFile);//Get OutputStream for NewFile Location
+
+                InputStream is = c.getInputStream();//Get InputStream for connection
+
+                byte[] buffer = new byte[1024];//Set buffer type
+                int len1 = 0;//init length
+                while ((len1 = is.read(buffer)) != -1) {
+                    fos.write(buffer, 0, len1);//Write new file
+                }
+
+                //Close all connection after doing task
+                fos.close();
+                is.close();
+
             } catch (Exception e) {
+
+                //Read exception if something went wrong
                 e.printStackTrace();
+                outputFile = null;
+                Log.e(TAG, "Download Error Exception " + e.getMessage());
             }
+
             return null;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            Toast.makeText(MainActivity.this, "Image downloaded successfully", Toast.LENGTH_LONG).show();
+        protected void onPreExecute() {
+            super.onPreExecute();
 
         }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            try {
+                if (outputFile == null) {
+                    Log.e(TAG, "Download Failed with Exception - ");
+                    Toast.makeText(MainActivity.this, "Oops!! Download Failed.", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    Log.e(TAG, "Download Complete");
+                    Toast.makeText(MainActivity.this, "Download Complete", Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            super.onPostExecute(result);
+        }
+
     }
 }

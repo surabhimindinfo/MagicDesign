@@ -29,7 +29,7 @@ public class Category implements Parcelable {
     private String name;
     @SerializedName("checked")
     @Expose
-    private Integer checked;
+    private Integer checked=0;
 
     protected Category(Parcel in) {
         categoryId = in.readString();

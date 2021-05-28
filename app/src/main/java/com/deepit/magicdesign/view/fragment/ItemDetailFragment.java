@@ -2,12 +2,15 @@ package com.deepit.magicdesign.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +35,11 @@ public class ItemDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         context = getContext();
         System.out.println("---- context at fragment --- " + context);
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        Window window = getActivity().getWindow();
+        WindowManager wm = getActivity().getWindowManager();
+        wm.removeViewImmediate(window.getDecorView());
+        wm.addView(window.getDecorView(), window.getAttributes());
 
     }
     @SuppressLint("SetTextI18n")
