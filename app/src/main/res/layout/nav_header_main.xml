@@ -7,7 +7,7 @@
     android:padding="10dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
          android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -15,18 +15,28 @@
         android:layout_centerVertical="true"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/logo" />
+        android:src="@drawable/app_logo" />
+    <View
+        android:id="@+id/view"
+        android:layout_margin="8dp"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_width="0.5dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
 
      <TextView
+
          android:id="@+id/nameTV"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:layout_centerVertical="true"
          android:layout_marginStart="10dp"
-        android:layout_toEndOf="@id/imageView"
+        android:layout_toEndOf="@id/view"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
+         android:textAllCaps="true"
+         android:textStyle="bold"
         android:text="@string/guest"
-        android:textColor="@color/white"  />
+        android:textColor="@color/yellow"  />
 
     <TextView
         android:id="@+id/numberTV"
@@ -35,6 +45,6 @@
         android:layout_below="@+id/nameTV"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
-        android:layout_toEndOf="@id/imageView"
+        android:layout_toEndOf="@id/view"
          />
 </RelativeLayout>

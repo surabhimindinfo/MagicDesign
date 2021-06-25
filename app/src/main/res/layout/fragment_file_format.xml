@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/design_hint"
+                android:text="@string/detail"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="italic" />

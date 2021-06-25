@@ -13,83 +13,98 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:stretchColumns="2">
 
-            <TextView
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:id="@+id/codeTV"
+            <TableRow
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:text="@string/code" />
+                android:layout_weight="1">
 
-            <TextView
+                <TextView
+                    android:id="@+id/codeTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_weight="1"
+                    android:text="@string/code"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"
-                android:id="@+id/stitchTV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/stitch" />
+                <TextView
+                    android:id="@+id/stitchTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/stitch"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-            <TextView
+            </TableRow>
 
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"
-                android:id="@+id/widthTV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/width" />
-        </LinearLayout>
+            <TableRow
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:padding="8dp">
+                <TextView
+                    android:id="@+id/widthTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_weight="1"
+                    android:text="@string/width"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-            <TextView
+                <TextView
+                    android:layout_marginStart="10dp"
+                    android:layout_column="2"
+                    android:id="@+id/heightTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/height"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:id="@+id/heightTV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/height" />
+            </TableRow>
 
-            <TextView
+            <TableRow
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"
-                android:id="@+id/needleTV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/needle" />
+                <TextView
 
-            <TextView
+                    android:layout_column="1"
+                    android:id="@+id/needleTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/needle"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"
-                android:id="@+id/catTV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#33C1FF" />
-        </LinearLayout>
+                <TextView
+                    android:layout_column="2"
+                    android:id="@+id/catTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:textColor="#33C1FF"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+        </TableLayout>
+
 
         <ImageView
             android:id="@+id/itemImageView"
@@ -99,12 +114,12 @@
             android:scaleType="fitXY" />
 
         <Button
-            android:layout_marginBottom="20dp"
             android:id="@+id/btn_download"
             android:layout_width="120dp"
             android:layout_height="36dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/btn_blue"
             android:gravity="center"
             android:padding="10dp"

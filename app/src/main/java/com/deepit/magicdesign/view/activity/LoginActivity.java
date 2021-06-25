@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deepit.magicdesign.R;
 import com.deepit.magicdesign.adapter.CountryCodeAdapter;
+import com.deepit.magicdesign.listner.OnSwipeTouchListener;
 import com.deepit.magicdesign.model.CountryRecord;
 import com.deepit.magicdesign.model.OnItemClick;
 import com.deepit.magicdesign.model.UserRecord;
@@ -102,6 +104,7 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
     }
     private void init() {
 
+        LinearLayout container = findViewById(R.id.container);
         login = findViewById(R.id.login);
         codeList = findViewById(R.id.codeList);
         listLayout = findViewById(R.id.listLayout);
@@ -110,7 +113,6 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
         codeList.setHasFixedSize(true);
         codeList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         codeList.setAdapter(codeAdapter);
-
         viewModel.getCountryCode();
         countryCodeTV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +151,16 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
                 // filter your list from your input
                 filter(s.toString());
                 //you can use runnable postDelayed like 500 ms to delay search text
+            }
+        });
+
+        container.setOnTouchListener(new OnSwipeTouchListener(LoginActivity.this)
+        {
+            @Override
+            public void onSwipeRight() {
+                super.onSwipeRight();
+                System.out.println("swipe right");
+             openSignUp(null);
             }
         });
     }
@@ -242,5 +254,11 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
 
             super.onBackPressed();
         }
+    }
+
+    public void openSignUp(View view) {
+        startActivity(new Intent(LoginActivity.this, SignUpActivity.class)
+        );
+        finish();
     }
 }

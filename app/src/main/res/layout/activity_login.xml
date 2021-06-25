@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
@@ -10,10 +15,11 @@
 
 
     <TextView
+        android:layout_gravity="end"
         android:id="@+id/tv_skip"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
         android:drawablePadding="4dp"
         android:gravity="center"
         android:onClick="openMainPage"
@@ -24,11 +30,11 @@
 
 
     <TextView
+        android:layout_gravity="center_horizontal"
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_skip"
-        android:layout_centerHorizontal="true"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
         android:fontFamily="@font/opensans_bold"
         android:gravity="center"
         android:text="@string/sign_in"
@@ -39,8 +45,8 @@
     <TextView
         android:id="@+id/tvCountry"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_height="0dp"
+        android:layout_weight="0.35"
         android:layout_marginTop="20dp"
         android:padding="8dp"
         android:text="@string/country_isd_code"
@@ -50,8 +56,8 @@
     <TextView
         android:id="@+id/countryCodeTV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvCountry"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
         android:layout_marginTop="8dp"
         android:background="@drawable/rect_trans"
         android:gravity="center_vertical"
@@ -64,74 +70,17 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="123dp" />
-
-
-    <TextView
-        android:id="@+id/tvMobile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/countryCodeTV"
-        android:layout_marginTop="20dp"
-        android:padding="8dp"
-        android:text="@string/mobile_number"
-
-        android:textColor="@color/white"
-        android:textSize="14sp" />
-
-
-    <EditText
-        android:id="@+id/et_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvMobile"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rect_trans"
-        android:drawableStart="@drawable/ic_call"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="@string/enter_your_mobile_number"
-        android:inputType="phone"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="14sp" />
-
-    <Button
-        android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_phone"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/btn_white"
-        android:onClick="loginUser"
-        android:text="@string/login"
-         android:textColor="@color/colorPrimaryDark"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_create"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="@string/tv_create"
-        android:textColor="@color/white"
-        android:textSize="14sp" />
-
     <LinearLayout
+        android:layout_weight="6"
         android:id="@+id/listLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/countryCodeTV"
+        android:layout_height="0dp"
         android:background="@color/white"
         android:orientation="vertical"
         android:visibility="gone">
 
         <EditText
-             android:id="@+id/searchET"
+            android:id="@+id/searchET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_search"
@@ -151,4 +100,61 @@
     </LinearLayout>
 
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/tvMobile"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.35"
+        android:layout_marginTop="20dp"
+        android:padding="8dp"
+        android:text="@string/mobile_number"
+
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rect_trans"
+        android:drawableStart="@drawable/ic_call"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="@string/enter_your_mobile_number"
+        android:inputType="phone"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/btn_white"
+        android:onClick="loginUser"
+        android:text="@string/login"
+         android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
+
+    <TextView
+        android:onClick="openSignUp"
+        android:id="@+id/tv_create"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:gravity="bottom|center_horizontal"
+        android:padding="10dp"
+        android:text="@string/tv_create"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+
+
+</LinearLayout>

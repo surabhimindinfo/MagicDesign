@@ -29,6 +29,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.deepit.magicdesign.Constant.TITLE;
+import static com.deepit.magicdesign.Constant.USER;
+import static com.deepit.magicdesign.network.MySharedPref.saveUser;
 
 public class AccountFragment extends Fragment {
     private EditText etname;
@@ -45,7 +47,6 @@ public class AccountFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getContext();
-        System.out.println("---- context at fragment --- " + context);
 
     }
     private void updateProfile(String name, String email,
@@ -68,12 +69,13 @@ public class AccountFragment extends Fragment {
 
                     assert registerResponse != null;
                     if (registerResponse.getStatus() == 1) {
+                        saveUser(context, USER,registerResponse.getRecord());
 
                         UserRecord.setUserRecord(registerResponse.getRecord());
                         startActivity(new Intent(context, MainActivity.class));
                      }
 
-                    Toast.makeText(context, registerResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, registerResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
                     progressDialog.cancel();
 

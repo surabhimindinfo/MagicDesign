@@ -85,13 +85,21 @@ public class Category implements Parcelable {
     }
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(categoryId);
-        dest.writeString(catName);
-        dest.writeString(catShortDesc);
-        dest.writeString(catImage);
-        dest.writeString(main_category_id);
-        dest.writeString(name);
-        dest.writeInt(checked);
-    }
+
+        try {
+            dest.writeString(categoryId);
+            dest.writeString(catName);
+            dest.writeString(catShortDesc);
+            dest.writeString(catImage);
+            dest.writeString(main_category_id);
+            dest.writeString(name);
+            dest.writeInt(checked);
+
+        }
+        catch (Exception e)
+
+        {
+            e.printStackTrace();
+        }    }
 
 }

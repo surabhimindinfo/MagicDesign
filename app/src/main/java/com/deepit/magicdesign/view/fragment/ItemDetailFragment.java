@@ -34,7 +34,6 @@ public class ItemDetailFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getContext();
-        System.out.println("---- context at fragment --- " + context);
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         Window window = getActivity().getWindow();
         WindowManager wm = getActivity().getWindowManager();

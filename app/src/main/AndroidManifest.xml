@@ -15,14 +15,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="q">
         <activity android:name=".view.activity.EditAccountDetailActivity"/>
-        <activity android:name=".view.activity.OtpActivity" />
+        <activity android:name=".view.activity.OtpActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".view.activity.BaseActivity" />
         <activity android:name=".view.activity.MainActivity"
             />
         <activity
             android:name=".view.activity.LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".view.activity.SignUpActivity" />
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".view.activity.SignUpActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".view.activity.LaunchActivity"  >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

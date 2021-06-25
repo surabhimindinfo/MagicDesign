@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,10 +51,14 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
 
 
         final Record record = results.get(position);
-        if (tag == R.string.home)
+        if (tag == R.string.home) {
+            holder.headTV.setText(record.getMainName());
             Glide.with(holder.itemView).load(record.getMainImage()).into(holder.myimage);
-        else
+        }
+        else {
+            holder.headTV.setText(record.getSubName());
             Glide.with(holder.itemView).load(record.getSubImage()).into(holder.myimage);
+        }
 
 
         holder.myimage.setOnClickListener(new View.OnClickListener() {
@@ -87,11 +92,13 @@ public class MainCategoryAdapter extends RecyclerView.Adapter<MainCategoryAdapte
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView myimage;
+        public TextView headTV;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             myimage = itemView.findViewById(R.id.myimage);
+            headTV = itemView.findViewById(R.id.headTV);
 
 
         }

@@ -97,6 +97,7 @@ public class CategoryItemFragment extends Fragment {
         final RelativeLayout filterLayout = view.findViewById(R.id.filterLayout);
         TextView filterTV = view.findViewById(R.id.filterTV);
         TextView clearBtn = view.findViewById(R.id.clearBtn);
+        TextView sortTV = view.findViewById(R.id.sortTV);
         Button apply_btn = view.findViewById(R.id.apply_btn);
         recyclerView = view.findViewById(R.id.recyclerView);
         filterItemList = view.findViewById(R.id.filterItemList);
@@ -104,7 +105,20 @@ public class CategoryItemFragment extends Fragment {
 
         openListVM();
         viewModel.showFilter();
+
         clearBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("--- saved items -- " + strItem.size());
+                filterLayout.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                viewModel.showFilter();
+                filterIds ="";
+                viewModel.getItem(record.getMainCategoryId(), record.getCategory_id(),
+                        record.getSubcategoryId(), 20, 1, "", filterIds);
+            }
+        });
+        sortTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("--- saved items -- " + strItem.size());

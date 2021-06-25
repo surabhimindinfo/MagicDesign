@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +46,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         System.out.println("--- image on cat at design list  --- " + record.getCatImage());
 
         Glide.with(holder.itemView).load(record.getCatImage()).into(holder.myimage);
+        holder.headTV.setText(record.getCatName());
 
 
         holder.myimage.setOnClickListener(new View.OnClickListener() {
@@ -74,10 +76,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView myimage;
+        public TextView headTV;
 
         public ViewHolder(View itemView) {
             super(itemView);
             myimage = itemView.findViewById(R.id.myimage);
+            headTV = itemView.findViewById(R.id.headTV);
         }
     }
 }

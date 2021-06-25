@@ -67,6 +67,8 @@
     <string name="width">Width :<![CDATA[<b><font color=#33C1FF> %1$s</font></b>]]></string>
     <string name="height">Height :<![CDATA[<b><font color=#33C1FF> %1$s</font></b>]]></string>
     <string name="needle">Needle :<![CDATA[<b><font color=#33C1FF> %1$s</font></b>]]></string>
-<!--    <string name="code">Code :<font color='#33C1FF'> %1$s</font></string>-->
+    <!--    <string name="code">Code :<font color='#33C1FF'> %1$s</font></string>-->
     <string name="download">Download</string>
+    <string name="category_name">Category Name</string>
+    <string name="sign_in_">Sign in ?</string>
 </resources>
