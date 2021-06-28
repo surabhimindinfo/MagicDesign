@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.deepit.magicdesign.network.response.FilterResponse;
 import com.deepit.magicdesign.network.response.FormatPrefResponse;
@@ -22,6 +23,7 @@ public class SubCatViewModel extends AndroidViewModel {
     private LiveData<FormatPrefResponse> subCatPrefResponseMutableLiveData;
     private LiveData<FormatPrefResponse> uploadPrefResponseMutableLiveData;
     private LiveData<FormatPrefResponse> downloadResponseMutableLiveData;
+    private LiveData<Boolean> loadingData;
     private SubCategoryRepo subCatRepo;
 
     public SubCatViewModel(@NonNull Application application) {
@@ -38,10 +40,10 @@ public class SubCatViewModel extends AndroidViewModel {
         subCatPrefResponseMutableLiveData = subCatRepo.getSubCatPrefResponse();
         uploadPrefResponseMutableLiveData = subCatRepo.uploadPrefResponse();
         downloadResponseMutableLiveData = subCatRepo.downloadResponse();
+        loadingData = subCatRepo.getLoading();
     }
 
     public void getSubCategory(String main_cat_id, String cat_id) {
-
         subCatRepo.getSubCat(main_cat_id, cat_id);
     }
 
@@ -137,5 +139,11 @@ public class SubCatViewModel extends AndroidViewModel {
             uploadPrefResponseMutableLiveData = subCatRepo.uploadPrefResponse();
 
          return uploadPrefResponseMutableLiveData;
+    }
+    public LiveData<Boolean> getLoadingResponse() {
+
+        if (loadingData == null)
+            loadingData = subCatRepo.getLoading();
+        return loadingData;
     }
 }

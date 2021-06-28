@@ -15,15 +15,17 @@ import retrofit2.Response;
 public class CountryCodeRepo {
 
     private MutableLiveData<CountryCodeResponse> countryCodeResponseLiveData;
+    private MutableLiveData<Integer> loadingData;
 
     public CountryCodeRepo()
     {
         countryCodeResponseLiveData=new MutableLiveData<>();
+        loadingData=new MutableLiveData<>();
     }
 
     public void getCountryCode() {
 
-
+        loadingData.setValue(0);
         ApiInterface apiInterface = ApiController.createService(ApiInterface.class);
         Call<CountryCodeResponse> call = apiInterface.getCountryCode();
         call.enqueue(new retrofit2.Callback<CountryCodeResponse>() {
@@ -36,6 +38,7 @@ public class CountryCodeRepo {
                     System.out.println("---- response body----- " + response.body() );
                     System.out.println("---- response success----- " + response.body().getCountryRecord() );
                     countryCodeResponseLiveData.postValue(response.body());
+                    loadingData.setValue(1);
                 }
             }
 
@@ -43,6 +46,7 @@ public class CountryCodeRepo {
             public void onFailure(Call<CountryCodeResponse> call, Throwable t) {
                 System.out.println("---- response fail----- ");
                 t.printStackTrace();
+                loadingData.setValue(1);
                  countryCodeResponseLiveData.postValue(null);
 
             }
@@ -52,7 +56,10 @@ public class CountryCodeRepo {
 
     public LiveData<CountryCodeResponse> getmainDesignResponse() {
 
-
         return countryCodeResponseLiveData;
+    }
+    public LiveData<Integer> getLoadingValue() {
+
+        return loadingData;
     }
 }

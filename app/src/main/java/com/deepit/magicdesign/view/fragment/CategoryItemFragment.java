@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class CategoryItemFragment extends Fragment {
     private FilterAdapter filterAdapter;
     private CheckBoxAdapter filterListadapter;
     private RecyclerView filterItemList;
+    private ProgressBar progressBar;
     private Record record;
     private int tag;
     private boolean isFilterOpen = false;
@@ -77,6 +79,17 @@ public class CategoryItemFragment extends Fragment {
 
             }
         });
+        viewModel.getLoadingResponse().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+
+                System.out.println("--- loading value -- " + aBoolean);
+                if (aBoolean) {
+                    progressBar.setVisibility(View.VISIBLE);                }
+                else {
+                    progressBar.setVisibility(View.GONE);                }
+            }
+        });
 
         if (context instanceof MainActivity) {
             Bundle bundle = getArguments();
@@ -101,10 +114,10 @@ public class CategoryItemFragment extends Fragment {
         Button apply_btn = view.findViewById(R.id.apply_btn);
         recyclerView = view.findViewById(R.id.recyclerView);
         filterItemList = view.findViewById(R.id.filterItemList);
-
-
+        progressBar = view.findViewById(R.id.progressBar);
         openListVM();
         viewModel.showFilter();
+        viewModel.getLoadingResponse();
 
         clearBtn.setOnClickListener(new View.OnClickListener() {
             @Override

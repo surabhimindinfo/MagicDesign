@@ -27,7 +27,7 @@ public class LaunchActivity extends BaseActivity {
     private void proceedToTheNextActivity() {
 
         Handler handler = new Handler();
-        long SPLASH_DELAY = 2000;
+        long SPLASH_DELAY = 1300;
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

@@ -1,10 +1,12 @@
 package com.deepit.magicdesign.view.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -27,11 +29,11 @@ import java.util.ArrayList;
 
 public class FragmentHome extends Fragment {
     View view;
-    ArrayList<Banner> sliderDataArrayList = new ArrayList<>();
     private Context context;
     private MainDesignViewModel viewModel;
     private MainCategoryAdapter adapter;
     private SliderAdapter sliderAdapter;
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +50,6 @@ public class FragmentHome extends Fragment {
             public void onChanged(MainDesignListResponse mainDesignListResponse) {
 
                 if (mainDesignListResponse != null) {
-//                    progressBar.setVisibility(View.GONE);
                     adapter.setResults(mainDesignListResponse.getRecord());
                 }
             }
@@ -59,9 +60,21 @@ public class FragmentHome extends Fragment {
             public void onChanged(BannerResponse mainDesignListResponse) {
 
                 if (mainDesignListResponse != null) {
-//                    progressBar.setVisibility(View.GONE);
+//
                     sliderAdapter.setResults(mainDesignListResponse.getRecord());
                 }
+            }
+        });
+
+        viewModel.getLoadingResponse().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+
+                System.out.println("--- loading value -- " + aBoolean);
+                if (aBoolean) {
+                    progressBar.setVisibility(View.VISIBLE);                }
+                else {
+                    progressBar.setVisibility(View.GONE);                }
             }
         });
 
@@ -73,8 +86,10 @@ public class FragmentHome extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        progressBar = view.findViewById(R.id.progressBar);
         viewModel.getMainDesign();
         viewModel.getBanner();
+        viewModel.getLoadingResponse();
 
         setSliderView();
         recyclerView.setHasFixedSize(true);
@@ -92,17 +107,8 @@ public class FragmentHome extends Fragment {
         // initializing the slider view.
         SliderView sliderView = view.findViewById(R.id.slider);
         sliderView.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
-
-        // below method is used to
-        // setadapter to sliderview.
         sliderView.setSliderAdapter(sliderAdapter);
-
-        // below method is use to set
-        // scroll time in seconds.
         sliderView.setScrollTimeInSec(3);
-
-        // to set it scrollable automatically
-        // we use below method.
         sliderView.setAutoCycle(true);
 
         sliderView.startAutoCycle();

@@ -46,9 +46,9 @@
                         app:sliderIndicatorMargin="15dp"
                         app:sliderIndicatorOrientation="horizontal"
                         app:sliderIndicatorPadding="3dp"
-                        app:sliderIndicatorRadius="1dp"
+                        app:sliderIndicatorRadius="2dp"
                         app:sliderIndicatorSelectedColor="@color/colorPrimaryDark"
-                        app:sliderIndicatorUnselectedColor="#FFF"
+                        app:sliderIndicatorUnselectedColor="@color/colorAccent"
                         app:sliderScrollTimeInSec="1" />
                 </androidx.cardview.widget.CardView>
 
@@ -94,14 +94,6 @@
             </LinearLayout>
 
 
-            <ProgressBar
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:layout_centerInParent="true"
-                android:id="@+id/progressBar"
-                android:visibility="gone"
-                tools:targetApi="lollipop" />
         </RelativeLayout>
 
     </ScrollView>
@@ -116,6 +108,15 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:src="@drawable/ic_whatsapp"/>
+
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:layout_centerInParent="true"
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        tools:targetApi="lollipop" />
 </RelativeLayout>
 
 

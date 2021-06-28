@@ -23,6 +23,7 @@ public class SubCategoryRepo {
     private final MutableLiveData<FormatPrefResponse> subCatPrefResponseMutableLiveData;
     private final MutableLiveData<FormatPrefResponse> uploadPrefResponseMutableLiveData;
     private final MutableLiveData<FormatPrefResponse> downloadResponseMutableLiveData;
+    private final MutableLiveData<Boolean> loadingData ;
 
     public SubCategoryRepo() {
         subCategoryResponseMutableLiveData = new MutableLiveData<>();
@@ -33,11 +34,12 @@ public class SubCategoryRepo {
         subCatPrefResponseMutableLiveData = new MutableLiveData<>();
         uploadPrefResponseMutableLiveData = new MutableLiveData<>();
         downloadResponseMutableLiveData = new MutableLiveData<>();
+        loadingData = new MutableLiveData<>();
     }
 
     public void getSubCat(String main_cat_id, String cat_id) {
 
-
+        loadingData.setValue(true);
         ApiInterface apiInterface = ApiController.createService(ApiInterface.class);
         Call<SubCategoryResponse> call = apiInterface.getSubCategory(main_cat_id, cat_id);
         call.enqueue(new retrofit2.Callback<SubCategoryResponse>() {
@@ -49,6 +51,7 @@ public class SubCategoryRepo {
                 if (response.body() != null) {
                     System.out.println("---- response success----- " + response.message());
                     subCategoryResponseMutableLiveData.postValue(response.body());
+                    loadingData.setValue(false);
                 }
             }
 
@@ -56,7 +59,7 @@ public class SubCategoryRepo {
             public void onFailure(Call<SubCategoryResponse> call, Throwable t) {
                 System.out.println("---- response fail----- ");
                 t.printStackTrace();
-
+                loadingData.setValue(false);
                 subCategoryResponseMutableLiveData.postValue(null);
 
             }
@@ -73,6 +76,7 @@ public class SubCategoryRepo {
         System.out.println("perpage :" + perpage);
         System.out.println("page :" + page);
         System.out.println("filterid :" + filterid);
+         loadingData.setValue(true);
         ApiInterface apiInterface = ApiController.createService(ApiInterface.class);
         Call<ItemResponse> call = apiInterface.getItem(main_category_id, category_id,
                 subcategory_id, perpage, page, search, filterid);
@@ -85,6 +89,7 @@ public class SubCategoryRepo {
                 if (response.body() != null) {
                     System.out.println("---- response success----- " + response.message());
                     itemResponseMutableLiveData.postValue(response.body());
+                    loadingData.setValue(false);
                 }
             }
 
@@ -92,7 +97,7 @@ public class SubCategoryRepo {
             public void onFailure(Call<ItemResponse> call, Throwable t) {
                 System.out.println("---- response fail----- ");
                 t.printStackTrace();
-
+                loadingData.setValue(false);
                 itemResponseMutableLiveData.postValue(null);
 
             }
@@ -102,7 +107,7 @@ public class SubCategoryRepo {
 
     public void getFilter() {
 
-
+         loadingData.setValue(true);
         ApiInterface apiInterface = ApiController.createService(ApiInterface.class);
         Call<FilterResponse> call = apiInterface.getFilter();
         call.enqueue(new retrofit2.Callback<FilterResponse>() {
@@ -113,6 +118,7 @@ public class SubCategoryRepo {
                 if (response1 != null) {
                     System.out.println("---- response success----- " + response.message());
                     filterResponseMutableLiveData.postValue(response.body());
+                    loadingData.setValue(false);
                 }
             }
 
@@ -120,7 +126,7 @@ public class SubCategoryRepo {
             public void onFailure(Call<FilterResponse> call, Throwable t) {
                 System.out.println("---- response fail----- ");
                 t.printStackTrace();
-
+                loadingData.setValue(false);
                 filterResponseMutableLiveData.postValue(null);
 
             }
@@ -130,7 +136,7 @@ public class SubCategoryRepo {
 
     public void getFormatPref(String userID) {
 
-
+         loadingData.setValue(true);
         ApiInterface apiInterface = ApiController.createService(ApiInterface.class);
         Call<FormatPrefResponse> call = apiInterface.getFormatPref(userID);
         call.enqueue(new retrofit2.Callback<FormatPrefResponse>() {
@@ -140,6 +146,7 @@ public class SubCategoryRepo {
                 FormatPrefResponse response1 = response.body();
                 if (response1 != null) {
                     System.out.println("---- response success----- " + response.message());
+                    loadingData.setValue(false);
                     formatPrefResponseMutableLiveData.postValue(response.body());
                 }
             }
@@ -148,7 +155,7 @@ public class SubCategoryRepo {
             public void onFailure(Call<FormatPrefResponse> call, Throwable t) {
                 System.out.println("---- response fail----- ");
                 t.printStackTrace();
-
+                loadingData.setValue(false);
                 formatPrefResponseMutableLiveData.postValue(null);
 
             }
@@ -157,7 +164,7 @@ public class SubCategoryRepo {
     }
     public void getCatPref(String userID,String main_cat) {
 
-
+         loadingData.setValue(true);
         ApiInterface apiInterface = ApiController.createService(ApiInterface.class);
         Call<FormatPrefResponse> call = apiInterface.getCatPref(userID,main_cat);
         call.enqueue(new retrofit2.Callback<FormatPrefResponse>() {
@@ -167,6 +174,7 @@ public class SubCategoryRepo {
                 FormatPrefResponse response1 = response.body();
                 if (response1 != null) {
                     System.out.println("---- response success----- " + response.message());
+                    loadingData.setValue(false);
                     catPrefResponseMutableLiveData.postValue(response.body());
                 }
             }
@@ -175,7 +183,7 @@ public class SubCategoryRepo {
             public void onFailure(Call<FormatPrefResponse> call, Throwable t) {
                 System.out.println("---- response fail----- ");
                 t.printStackTrace();
-
+                loadingData.setValue(false);
                 catPrefResponseMutableLiveData.postValue(null);
 
             }
@@ -184,7 +192,7 @@ public class SubCategoryRepo {
     }
     public void getSubCatPref(String userID,String main_cat) {
 
-
+         loadingData.setValue(true);
         ApiInterface apiInterface = ApiController.createService(ApiInterface.class);
         Call<FormatPrefResponse> call = apiInterface.getSubCatPref(userID,main_cat);
         call.enqueue(new retrofit2.Callback<FormatPrefResponse>() {
@@ -193,6 +201,7 @@ public class SubCategoryRepo {
 
                 FormatPrefResponse response1 = response.body();
                 if (response1 != null) {
+                    loadingData.setValue(false);
                     subCatPrefResponseMutableLiveData.postValue(response.body());
                 }
             }
@@ -200,6 +209,7 @@ public class SubCategoryRepo {
             @Override
             public void onFailure(Call<FormatPrefResponse> call, Throwable t) {
                 t.printStackTrace();
+                loadingData.setValue(false);
                 subCatPrefResponseMutableLiveData.postValue(null);
 
             }
@@ -208,7 +218,7 @@ public class SubCategoryRepo {
     }
     public void savePrefToServer(String userID,String machineId,String main_cat,String catIds,String subCatIds) {
 
-
+         loadingData.setValue(true);
         ApiInterface apiInterface = ApiController.createService(ApiInterface.class);
         Call<FormatPrefResponse> call = apiInterface.savePrefToServer(userID,machineId,main_cat,catIds,subCatIds);
         call.enqueue(new retrofit2.Callback<FormatPrefResponse>() {
@@ -217,6 +227,7 @@ public class SubCategoryRepo {
 
                 FormatPrefResponse response1 = response.body();
                 if (response1 != null) {
+                    loadingData.setValue(false);
                     uploadPrefResponseMutableLiveData.postValue(response.body());
                 }
             }
@@ -224,7 +235,7 @@ public class SubCategoryRepo {
             @Override
             public void onFailure(Call<FormatPrefResponse> call, Throwable t) {
                 t.printStackTrace();
-
+                loadingData.setValue(false);
                 uploadPrefResponseMutableLiveData.postValue(null);
 
             }
@@ -235,7 +246,7 @@ public class SubCategoryRepo {
 
     public void checkAvailabilityDownload(String itemId,String userId) {
 
-
+         loadingData.setValue(true);
         ApiInterface apiInterface = ApiController.createService(ApiInterface.class);
         Call<FormatPrefResponse> call = apiInterface.checkDownloadAvailability(itemId,userId);
         call.enqueue(new retrofit2.Callback<FormatPrefResponse>() {
@@ -244,6 +255,7 @@ public class SubCategoryRepo {
 
                 FormatPrefResponse response1 = response.body();
                 if (response1 != null) {
+                    loadingData.setValue(false);
                     downloadResponseMutableLiveData.postValue(response.body());
                 }
             }
@@ -251,7 +263,7 @@ public class SubCategoryRepo {
             @Override
             public void onFailure(Call<FormatPrefResponse> call, Throwable t) {
                 t.printStackTrace();
-
+                loadingData.setValue(false);
                 downloadResponseMutableLiveData.postValue(null);
 
             }
@@ -267,4 +279,8 @@ public class SubCategoryRepo {
     public LiveData<FormatPrefResponse> getSubCatPrefResponse() { return subCatPrefResponseMutableLiveData; }
     public LiveData<FormatPrefResponse> uploadPrefResponse() { return uploadPrefResponseMutableLiveData; }
     public LiveData<FormatPrefResponse> downloadResponse() { return downloadResponseMutableLiveData; }
+
+    public LiveData<Boolean> getLoading() {
+        return loadingData;
+    }
 }

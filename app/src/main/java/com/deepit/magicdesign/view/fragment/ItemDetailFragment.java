@@ -2,7 +2,6 @@ package com.deepit.magicdesign.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -21,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.deepit.magicdesign.R;
 import com.deepit.magicdesign.model.Item;
+import com.deepit.magicdesign.network.MovableFloatingActionButton;
 import com.deepit.magicdesign.view.activity.MainActivity;
 
 import static com.deepit.magicdesign.Constant.TITLE;
@@ -41,6 +41,7 @@ public class ItemDetailFragment extends Fragment {
         wm.addView(window.getDecorView(), window.getAttributes());
 
     }
+
     @SuppressLint("SetTextI18n")
     private void init(View v) {
 
@@ -56,7 +57,7 @@ public class ItemDetailFragment extends Fragment {
         downloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) context).downLoadImage(item.getFiles(),item.getItemId());
+                ((MainActivity) context).downLoadImage(item.getFiles(), item.getItemId());
             }
         });
         if (context instanceof MainActivity) {
@@ -86,6 +87,7 @@ public class ItemDetailFragment extends Fragment {
         }
 
     }
+
     private Spanned getText(int resString, String value) {
         return Html.fromHtml(String.format(getResources().getString(resString), value));
 
@@ -95,7 +97,7 @@ public class ItemDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-      View  view = inflater.inflate(R.layout.fragment_item_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_item_detail, container, false);
         init(view);
         return view;
     }

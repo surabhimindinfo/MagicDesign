@@ -14,10 +14,11 @@ public class MainDesignViewModel extends AndroidViewModel {
 
     private LiveData<MainDesignListResponse> mainDesignListResponseMutableLiveData;
     private LiveData<BannerResponse> bannerResponseMutableLiveData;
+    private LiveData<Boolean> loadingData;
 
     private MainDesignRepositary mainDesignRepo;
 
-     public MainDesignViewModel(@NonNull Application application) {
+    public MainDesignViewModel(@NonNull Application application) {
         super(application);
     }
 
@@ -25,14 +26,15 @@ public class MainDesignViewModel extends AndroidViewModel {
         mainDesignRepo = new MainDesignRepositary();
         mainDesignListResponseMutableLiveData = mainDesignRepo.getmainDesignResponse();
         bannerResponseMutableLiveData = mainDesignRepo.getBannerResponse();
+        loadingData = mainDesignRepo.getLoading();
     }
 
     public void getMainDesign() {
-         mainDesignRepo.getMainDesign( );
+        mainDesignRepo.getMainDesign();
     }
 
     public void getBanner() {
-         mainDesignRepo.getBanner( );
+        mainDesignRepo.getBanner();
     }
 
     public LiveData<MainDesignListResponse> getMainDesignListResponseLiveData() {
@@ -43,6 +45,7 @@ public class MainDesignViewModel extends AndroidViewModel {
         System.out.println("--- main design obj ---- " + mainDesignListResponseMutableLiveData);
         return mainDesignListResponseMutableLiveData;
     }
+
     public LiveData<BannerResponse> getBannerResponseLiveData() {
 
         if (bannerResponseMutableLiveData == null)
@@ -50,5 +53,12 @@ public class MainDesignViewModel extends AndroidViewModel {
 
         System.out.println("--- main design obj ---- " + bannerResponseMutableLiveData);
         return bannerResponseMutableLiveData;
+    }
+
+    public LiveData<Boolean> getLoadingResponse() {
+
+        if (loadingData == null)
+            loadingData = mainDesignRepo.getLoading();
+        return loadingData;
     }
 }

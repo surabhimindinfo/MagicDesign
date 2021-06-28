@@ -15,6 +15,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.deepit.magicdesign.R;
 import com.deepit.magicdesign.adapter.CountryCodeAdapter;
 import com.deepit.magicdesign.listner.OnSwipeTouchListener;
@@ -26,11 +31,6 @@ import com.deepit.magicdesign.network.ApiInterface;
 import com.deepit.magicdesign.network.response.CountryCodeResponse;
 import com.deepit.magicdesign.network.response.VerifyResponse;
 import com.deepit.magicdesign.viewmodel.CountryCodeViewModel;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
     private CountryCodeAdapter codeAdapter;
     private String country_id = "";
     private boolean isListOpen = false;
-    private List<CountryRecord> results=new ArrayList<>();
+    private List<CountryRecord> results = new ArrayList<>();
 
     @SuppressLint("HardwareIds")
     @Override
@@ -73,12 +73,14 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
 
         viewModel = new ViewModelProvider(this).get(CountryCodeViewModel.class);
         viewModel.init();
+
         viewModel.getCountryCodeResponseLiveData().observe(this, new Observer<CountryCodeResponse>() {
             @Override
             public void onChanged(CountryCodeResponse response) {
                 if (response != null) {
+
                     System.out.println("----- country code response ---- " + response.getCountryRecord().size());
-                    results=response.getCountryRecord();
+                    results = response.getCountryRecord();
                     codeAdapter.setResults(response.getCountryRecord());
                 } else
                     Toast.makeText(LoginActivity.this, "Server not responding, Try again", Toast.LENGTH_LONG).show();
@@ -89,11 +91,11 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
         init();
     }
 
-    void filter(String text){
+    void filter(String text) {
         List<CountryRecord> temp = new ArrayList();
-        for(CountryRecord d:results){
+        for (CountryRecord d : results) {
 
-            if(d.getName().toLowerCase().contains(text)){
+            if (d.getName().toLowerCase().contains(text)) {
                 temp.add(d);
             }
         }
@@ -102,9 +104,10 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
 
 
     }
+
     private void init() {
 
-        LinearLayout container = findViewById(R.id.container);
+        RelativeLayout container = findViewById(R.id.container);
         login = findViewById(R.id.login);
         codeList = findViewById(R.id.codeList);
         listLayout = findViewById(R.id.listLayout);
@@ -120,12 +123,12 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
                 if (isListOpen) {
                     isListOpen = false;
                     login.setVisibility(View.VISIBLE);
-                     listLayout.setVisibility(View.GONE);
+                    listLayout.setVisibility(View.GONE);
                 } else {
 
                     isListOpen = true;
                     login.setVisibility(View.GONE);
-                     listLayout.setVisibility(View.VISIBLE);
+                    listLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -154,13 +157,12 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
             }
         });
 
-        container.setOnTouchListener(new OnSwipeTouchListener(LoginActivity.this)
-        {
+        container.setOnTouchListener(new OnSwipeTouchListener(LoginActivity.this) {
             @Override
             public void onSwipeRight() {
                 super.onSwipeRight();
                 System.out.println("swipe right");
-             openSignUp(null);
+                openSignUp(null);
             }
         });
     }
@@ -191,7 +193,6 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
-
         ApiInterface apiInterface = ApiController.createService(ApiInterface.class);
 
         Call<VerifyResponse> call = apiInterface.login(mobile, country_id, "android", device_id);
@@ -201,11 +202,11 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
             public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
 
                 VerifyResponse registerResponse = response.body();
-                 assert registerResponse != null;
+                assert registerResponse != null;
                 if (registerResponse.getStatus() == 1) {
-                    UserRecord.setUserRecord( registerResponse.getRecord());
-                    saveData(getApplicationContext(), LOGIN_TYPE,USER);
-                    saveUser(getApplicationContext(), USER,registerResponse.getRecord());
+                    UserRecord.setUserRecord(registerResponse.getRecord());
+                    saveData(getApplicationContext(), LOGIN_TYPE, USER);
+                    saveUser(getApplicationContext(), USER, registerResponse.getRecord());
 
                     startActivity(new Intent(LoginActivity.this, MainActivity.class)
                             .putExtra(LOGIN_TYPE, USER));
@@ -246,11 +247,10 @@ public class LoginActivity extends BaseActivity implements OnItemClick {
     @Override
     public void onBackPressed() {
         if (isListOpen) {
-            isListOpen=false;
+            isListOpen = false;
             login.setVisibility(View.VISIBLE);
             listLayout.setVisibility(View.GONE);
-        }
-        else {
+        } else {
 
             super.onBackPressed();
         }

@@ -12,6 +12,7 @@ import com.deepit.magicdesign.repositary.CountryCodeRepo;
 public class CountryCodeViewModel extends AndroidViewModel {
 
     private LiveData<CountryCodeResponse> countryCodeResponseMutableLiveData;
+    private LiveData<Integer> loading;
 
     private CountryCodeRepo countryCodeRepo;
 
@@ -22,6 +23,7 @@ public class CountryCodeViewModel extends AndroidViewModel {
     public void init() {
         countryCodeRepo = new CountryCodeRepo();
         countryCodeResponseMutableLiveData = countryCodeRepo.getmainDesignResponse();
+        loading = countryCodeRepo.getLoadingValue();
     }
 
     public void getCountryCode() {
@@ -34,5 +36,13 @@ public class CountryCodeViewModel extends AndroidViewModel {
             countryCodeResponseMutableLiveData = countryCodeRepo.getmainDesignResponse();
 
          return countryCodeResponseMutableLiveData;
+    }
+
+    public LiveData<Integer> getLoading() {
+
+        if (loading == null)
+            loading = countryCodeRepo.getLoadingValue();
+
+         return loading;
     }
 }

@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="@color/colorAccent"
+    tools:targetApi="lollipop">
+    <item>
 
-    <item >
         <shape android:shape="rectangle">
-            <gradient android:startColor="@color/colorPrimary"
-                android:endColor="@color/colorPrimary"
-                android:type="linear"
-                />
-            <corners android:radius="28dp"/>
+            <solid android:color="@color/bg_trans" />
+            <size
+                android:width="200dp"
+                android:height="60dp" />
+            <corners android:radius="40dp" />
         </shape>
     </item>
-</layer-list>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:endColor="@color/colorPrimary"
+                android:startColor="@color/colorPrimary"
+                android:type="linear" />
+            <corners android:radius="28dp" />
+        </shape>
+    </item>
+</ripple>

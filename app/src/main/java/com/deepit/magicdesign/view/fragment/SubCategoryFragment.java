@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -31,6 +31,7 @@ public class SubCategoryFragment extends Fragment {
     private SubCatViewModel viewModel;
     private MainCategoryAdapter adapter;
     private Category record;
+    private ProgressBar progressBar;
     private int tag;
 
     @Override
@@ -46,16 +47,30 @@ public class SubCategoryFragment extends Fragment {
 
                 if (subCategoryResponse != null) {
                     System.out.println("------ size subcat-----");
-                if(subCategoryResponse.getSubCategory()!=null)
-                     adapter.setResults(subCategoryResponse.getSubCategory());
-                else
-                    Toast.makeText(context,subCategoryResponse.getMessage(),Toast.LENGTH_LONG).show();
+                    if (subCategoryResponse.getSubCategory() != null)
+                        adapter.setResults(subCategoryResponse.getSubCategory());
+                    else
+                        Toast.makeText(context, subCategoryResponse.getMessage(), Toast.LENGTH_LONG).show();
 
                 } else {
-                    Toast.makeText(context,"Server not responding!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Server not responding!", Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+        viewModel.getLoadingResponse().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+
+                System.out.println("--- loading value -- " + aBoolean);
+                if (aBoolean) {
+                    progressBar.setVisibility(View.VISIBLE);
+                } else {
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
+
         if (context instanceof MainActivity) {
             Bundle bundle = getArguments();
             if (bundle != null) {
@@ -65,19 +80,18 @@ public class SubCategoryFragment extends Fragment {
             }
         }
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_designer_detail, container, false);
         context = getContext();
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-        TextView noResultTV = view.findViewById(R.id.noResultTV);
+        progressBar = view.findViewById(R.id.progressBar);
 
         viewModel.getSubCategory(record.getMain_category_id(), record.getCategoryId());
-
-
-
-         recyclerView.setHasFixedSize(true);
+        viewModel.getLoadingResponse();
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapter);
 
